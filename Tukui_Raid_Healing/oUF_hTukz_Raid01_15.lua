@@ -209,11 +209,17 @@ oUF:Factory(function(self)
 	'initial-width', T.Scale(150*T.raidscale),
 	'initial-height', T.Scale(32*T.raidscale),	
 	"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-8))
-	if ChatBG1 then
-		raid:Point("BOTTOMLEFT", ChatBG1, "TOPLEFT", 2, 6)
+	if TukuiBar2 and TukuiBar2:IsShown() then
+		raid:Point("BOTTOMLEFT", TukuiBar2, "TOPLEFT", 2, 34)
 	else
-		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 21)
+		raid:Point("BOTTOMLEFT", TukuiBar1, "TOPLEFT", 2, 34)
 	end
+	TukuiBar2:HookScript("OnShow", function()
+		raid:Point("BOTTOMLEFT", TukuiBar2, "TOPLEFT", 2, 34)
+	end)
+	TukuiBar2:HookScript("OnHide", function()
+		raid:Point("BOTTOMLEFT", TukuiBar1, "TOPLEFT", 2, 34)
+	end)
 	
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 

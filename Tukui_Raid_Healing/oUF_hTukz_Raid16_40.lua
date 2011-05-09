@@ -270,11 +270,17 @@ oUF:Factory(function(self)
 		"columnAnchorPoint", capG,
 		"showSolo", C.unitframes.gridsolo
 	)
-	if ChatBG1 then
-		raid:Point("BOTTOMLEFT", ChatBG1, "TOPLEFT", 2, 6)
+	if TukuiBar2 and TukuiBar2:IsShown() then
+		raid:Point("BOTTOMLEFT", TukuiBar2, "TOPLEFT", 2, 34)
 	else
-		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 21)
+		raid:Point("BOTTOMLEFT", TukuiBar1, "TOPLEFT", 2, 34)
 	end
+	TukuiBar2:HookScript("OnShow", function()
+		raid:Point("BOTTOMLEFT", TukuiBar2, "TOPLEFT", 2, 34)
+	end)
+	TukuiBar2:HookScript("OnHide", function()
+		raid:Point("BOTTOMLEFT", TukuiBar1, "TOPLEFT", 2, 34)
+	end)
 	
 	if C.unitframes.gridpets and not C.unitframes.gridvertical then
 		local pets = {} 

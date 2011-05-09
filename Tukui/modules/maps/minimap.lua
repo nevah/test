@@ -21,6 +21,7 @@ Minimap:SetParent(TukuiMinimap)
 Minimap:ClearAllPoints()
 Minimap:Point("TOPLEFT", 2, -2)
 Minimap:Point("BOTTOMRIGHT", -2, 2)
+Minimap:SetSize(T.Scale(158), T.Scale(158)) 
 
 -- Hide Border
 MinimapBorder:Hide()

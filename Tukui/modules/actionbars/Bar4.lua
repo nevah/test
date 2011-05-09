@@ -61,7 +61,7 @@ function TukuiRightBarsMouseover(alpha)
 	TukuiBar3Button:SetAlpha(alpha)
 	MultiBarRight:SetAlpha(alpha)
 	MultiBarLeft:SetAlpha(alpha)
-	if C["actionbar"].petbarhorizontal ~= true then TukuiLineToPetActionBarBackground:SetAlpha(alpha) end
+	if C["actionbar"].petbarhorizontal ~= true then TukuiLineToPetActionBarBackground1:SetAlpha(alpha) TukuiLineToPetActionBarBackground2:SetAlpha(alpha) end
 	if C["actionbar"].petbaralwaysvisible ~= true and C["actionbar"].petbarhorizontal ~= true then
 		TukuiPetBar:SetAlpha(alpha)
 		for i=1, NUM_PET_ACTION_SLOTS do
@@ -78,7 +78,7 @@ local function mouseover(f)
 end
 mouseover(TukuiBar3)
 mouseover(rbmoh)
-if C["actionbar"].petbarhorizontal ~= true then mouseover(TukuiLineToPetActionBarBackground) end
+if C["actionbar"].petbarhorizontal ~= true then mouseover(TukuiLineToPetActionBarBackground1) mouseover(TukuiLineToPetActionBarBackground2) end
 
 for i = 1, 12 do
 	_G["MultiBarRightButton"..i]:EnableMouse(true)
@@ -97,6 +97,4 @@ if C["actionbar"].petbaralwaysvisible ~= true and C["actionbar"].petbarhorizonta
 		_G["PetActionButton"..i]:HookScript("OnLeave", function() TukuiRightBarsMouseover(0) end)
 	end
 	mouseover(TukuiPetBar)
-else
-	TukuiLineToPetActionBarBackground:Hide()
 end

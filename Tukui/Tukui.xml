@@ -54,6 +54,10 @@
 	<Script file="modules\blizzard\ghostframe.lua"/>
 	<Script file="modules\blizzard\timertracker.lua"/>
 	
+	<Script file="modules\extras\raidbuffreminder.lua"/>
+	<Script file="modules\extras\spechelper.lua"/>
+	<Script file="modules\extras\wildmushrooms.lua"/>
+	
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
 	<Script file="modules\misc\invite.lua"/>
@@ -94,6 +98,17 @@
 	<Script file="modules\datatext\mastery.lua"/>
 	<Script file="modules\datatext\misc.lua"/>
 	<Script file="modules\datatext\regen.lua"/>
+	
+	<Script file="modules\databars\barPanels.lua"/>
+	<Script file="modules\databars\exp_rep.lua"/>
+	<Script file="modules\databars\fps.lua"/>
+	<Script file="modules\databars\latency.lua"/>
+	<Script file="modules\databars\memory.lua"/>
+	<Script file="modules\databars\bags.lua"/>
+	<Script file="modules\databars\currency.lua"/>
+	<Script file="modules\databars\durability.lua"/>
+	<Script file="modules\databars\talents.lua"/>
+	<Script file="modules\databars\postCreation.lua"/>
 	
 	<Script file="modules\actionbars\Bind.lua"/>
 	<Script file="modules\actionbars\Hide.lua"/>
@@ -143,6 +158,7 @@
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\duffed.lua"/>
 	<Script file="modules\unitframes\layouts\duffed2.lua"/>
+	<Script file="modules\unitframes\layouts\epic.lua"/>
 	<Script file="modules\misc\sCombo.lua"/>
 	
 	<Script file="modules\misc\altpowerbar.lua"/>

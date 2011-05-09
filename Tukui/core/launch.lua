@@ -23,29 +23,26 @@ local function chatsetup()
 			local chatName = FCF_GetChatWindowInfo(chatFrameId)
 			
 			-- set the size of chat frames
-			if not T.lowversion then
 				frame:Size(366, 117)
 				SetChatWindowSavedDimensions(chatFrameId, 366, T.Scale(117))
 				-- move general bottom left or Loot (if found) on right
-				if i == 1 then
-					frame:ClearAllPoints()
-					frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9)
-				elseif i == 4 and chatName == LOOT.."/"..L.chat_trade then
-					frame:ClearAllPoints()
-					frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9)
+				if C.panels.switchchats ~= true then
+					if i == 1 then
+						frame:ClearAllPoints()
+						frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9)
+					elseif i == 4 and chatName == LOOT.."/"..L.chat_trade then
+						frame:ClearAllPoints()
+						frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9)
+					end
+				else
+					if i == 1 then
+						frame:ClearAllPoints()
+						frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9)
+					elseif i == 4 and chatName == LOOT.."/"..L.chat_trade then
+						frame:ClearAllPoints()
+						frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9)
+					end
 				end
-			else
-				frame:Size(350, 93)
-				SetChatWindowSavedDimensions(chatFrameId, 350, T.Scale(93))
-				-- move general bottom left or Loot (if found) on right
-				if i == 1 then
-					frame:ClearAllPoints()
-					frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 26)
-				elseif i == 4 and chatName == LOOT.."/"..L.chat_trade then
-					frame:ClearAllPoints()
-					frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 26)
-				end
-			end
 					
 			-- save new default position and dimension
 			FCF_SavePositionAndDimensions(frame)
@@ -206,7 +203,7 @@ v.Text2:SetPoint("BOTTOM", 0, 6)
 v.Text2:SetText("www.tukui.org")
 v:FontString("Text3", C.media.font, 12)
 v.Text3:SetPoint("CENTER", 0, 5)
-v.Text3:SetText("Edited by:|cffff0000 Duffed")
+v.Text3:SetText("Edited by:|cffff0000 Epic")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)

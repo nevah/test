@@ -32,7 +32,7 @@ anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
 anchor:SetAlpha(0)
 if ChatBG2 or AddonBGPanel then
-	anchor:SetPoint("BOTTOMRIGHT", ChatBG2 or AddonBGPanel, "TOPRIGHT", 0, -TukuiInfoRight:GetHeight())
+	anchor:SetPoint("BOTTOMRIGHT", ChatBG2 or AddonBGPanel, "TOPRIGHT", 0, 6)
 else
 	anchor:Point("BOTTOMRIGHT", ChatFrame4, "TOPRIGHT", 0, 10)
 end
@@ -95,8 +95,13 @@ local function UpdateTooltip(self)
 			self:ClearAllPoints()
 			self:SetPoint("BOTTOMLEFT", TukuiTooltipAnchor, "TOPLEFT", 0, x)		
 		elseif point == "BOTTOMRIGHT" or point == "RIGHT" then
-			self:ClearAllPoints()
-			self:SetPoint("BOTTOMRIGHT", TukuiTooltipAnchor, "TOPRIGHT", 0, x)
+			if TukuiBags and TukuiBags:IsShown() then
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOMRIGHT", TukuiBags, "TOPRIGHT", 0, x)			
+			else
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOMRIGHT", TukuiTooltipAnchor, "TOPRIGHT", 0, x)
+			end
 		else
 			self:ClearAllPoints()
 			self:SetPoint("BOTTOM", TukuiTooltipAnchor, "TOP", 0, x)		

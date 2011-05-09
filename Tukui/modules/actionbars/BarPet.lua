@@ -29,14 +29,15 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 			button = _G["PetActionButton"..i]
 			button:ClearAllPoints()
 			button:SetParent(TukuiPetBar)
-			button:SetSize(T.petbuttonsize, T.petbuttonsize)
 			if C["actionbar"].petbarhorizontal == true then
+				button:SetSize(T.hpetbuttonsize, T.hpetbuttonsize)
 				if i == 1 then
-					button:SetPoint("TOPLEFT", T.buttonspacing,-T.buttonspacing)
+					button:SetPoint("TOPLEFT", 2, -2)
 				else
 					button:SetPoint("LEFT", _G["PetActionButton"..(i - 1)], "RIGHT", T.buttonspacing, 0)
 				end
 			else
+				button:SetSize(T.petbuttonsize, T.petbuttonsize)
 				if i == 1 then
 					button:SetPoint("TOPLEFT", T.buttonspacing,-T.buttonspacing)
 				else

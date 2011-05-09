@@ -97,13 +97,24 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
-		if pet then			
-			if T.petbuttonsize < 30 then
+		if pet then	
+			if C["actionbar"].petbarhorizontal == true then
+			button:SetWidth(T.hpetbuttonsize)
+			button:SetHeight(T.hpetbuttonsize)
+			panel:Kill()
+			local hpanel = CreateFrame("Frame", name.."Panel", button)
+			hpanel:CreatePanel("Default", T.hpetbuttonsize, T.hpetbuttonsize, "CENTER", button, "CENTER", 0, 0)
+			end
+			if T.petbuttonsize < 30 or C["actionbar"].petbarhorizontal ~= true then
 				local autocast = _G[name.."AutoCastable"]
 				autocast:SetAlpha(0)
 			end
-			local shine = _G[name.."Shine"]
-			shine:Size(T.petbuttonsize, T.petbuttonsize)
+			local shine = _G[name.."Shine"]			
+			if C["actionbar"].petbarhorizontal == true then
+				shine:Size(T.hpetbuttonsize, T.hpetbuttonsize)
+			else
+				shine:Size(T.petbuttonsize, T.petbuttonsize)
+			end
 			shine:ClearAllPoints()
 			shine:SetPoint("CENTER", button, 0, 0)
 			icon:Point("TOPLEFT", button, 2, -2)

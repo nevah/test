@@ -6,9 +6,9 @@ if not C["actionbar"].enable == true then return end
 ---------------------------------------------------------------------------
 
 -- used for anchor totembar or shapeshiftbar
-local TukuiShift = CreateFrame("Frame","TukuiShiftBar",UIParent)
-TukuiShift:SetPoint("TOPLEFT", 4, -46)
-TukuiShift:SetSize((T.petbuttonsize * 5) + (T.petbuttonsize * 4), 15)
+local TukuiShift = CreateFrame("Frame","TukuiShiftBar", ChatBG1)
+TukuiShift:SetPoint("BOTTOMLEFT", ChatBG1, "BOTTOMRIGHT", 10, T.buttonspacing)
+TukuiShift:SetSize((T.petbuttonsize * 5) + (T.petbuttonsize * 4), 40)
 TukuiShift:SetFrameStrata("MEDIUM")
 TukuiShift:SetMovable(true)
 TukuiShift:SetClampedToScreen(true)
@@ -17,7 +17,7 @@ TukuiShift:SetClampedToScreen(true)
 local ssmover = CreateFrame("Frame", "TukuiShapeShiftHolder", UIParent)
 ssmover:SetAllPoints(TukuiShift)
 ssmover:SetTemplate("Transparent")
-ssmover:SetFrameStrata("HIGH")
+ssmover:SetFrameStrata("TOOLTIP")
 ssmover:SetBackdropColor(0,0,0,.5)
 ssmover:SetBackdropBorderColor(1,0,0)
 ssmover:SetAlpha(0)
@@ -60,7 +60,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			button:SetParent(self)
 			button:SetFrameStrata("LOW")
 			if i == 1 then
-				button:Point("BOTTOMLEFT", TukuiShift, 0, 24)
+				button:Point("BOTTOMLEFT", TukuiShift, 0, 0)
 			else
 				local previous = _G["ShapeshiftButton"..i-1]
 				button:Point("LEFT", previous, "RIGHT", T.buttonspacing, 0)
@@ -116,12 +116,12 @@ end)
 
 -- Border
 local ssborder = CreateFrame("Frame", "ShapeShiftBorder", ShapeshiftButton1)
-if C["actionbar"].shapeshiftborder ~= true then
-	ssborder:SetAlpha(0)
-else
-	ssborder:SetTemplate("Transparent")
-	ssborder:CreateShadow("Default")
-end
+ssborder:SetTemplate("Transparent")
+ssborder:CreateShadow("Default")
 ssborder:SetFrameLevel(1)
 ssborder:SetFrameStrata("BACKGROUND")
 ssborder:Point("LEFT", -T.buttonspacing, 0)
+local ssborderln1 = CreateFrame("Frame", nil, ShapeShiftBorder)
+ssborderln1:CreatePanel("Default", 5, 2, "TOPRIGHT", ShapeShiftBorder, "TOPLEFT", 0, -5)
+local ssborderln2 = CreateFrame("Frame", nil, ShapeShiftBorder)
+ssborderln2:CreatePanel("Default", 5, 2, "BOTTOMRIGHT", ShapeShiftBorder, "BOTTOMLEFT", 0, 5)

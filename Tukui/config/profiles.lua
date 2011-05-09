@@ -4,8 +4,9 @@
 -- Class need to be UPPERCASE
 ----------------------------------------------------------------------------
 
-if T.myclass == "PRIEST" then
-	-- do some config!
+if T.myclass == "DRUID" then
+		C.actionbar.hideshapeshift = true
+		C.unitframes.classbar = false
 end
 
 ----------------------------------------------------------------------------
@@ -13,8 +14,8 @@ end
 -- Name need to be case sensitive
 ----------------------------------------------------------------------------
 
-if T.myname == "Sacerdus" then
-	C.unitframes.gridvertical = true
+if T.myname == "Epicgoose" then
+	C.swingtimer.enable = true
 end
 
 ----------------------------------------------------------------------------

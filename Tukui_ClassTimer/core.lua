@@ -1,5 +1,5 @@
 local T, C, L = unpack(Tukui)
-if ( C == nil or C["unitframes"] == nil or not C["unitframes"]["enable"] ) then return end
+if C["unitframes"].enable ~= true then return end
 
 --[[ Configuration functions - DO NOT TOUCH
 	id - spell id
@@ -38,8 +38,8 @@ local TENTHS_TRESHOLD = 1 -- Timer tenths threshold - range from 1 to 60
 -- Trinket filter - mostly for trinket procs, delete or wrap into comment block --[[  ]] if you dont want to track those
 local TRINKET_FILTER = {
 		
-		CreateSpellEntry( 2825, true ), CreateSpellEntry( 32182, true ), CreateSpellEntry( 80353, true), -- Bloodlust/Heroism/Timewarp
-		CreateSpellEntry( 90355, true ), -- Ancient Hysteria, bloodlust from hunters pet
+		-- CreateSpellEntry( 2825, true ), CreateSpellEntry( 32182, true ), CreateSpellEntry( 80353, true), -- Bloodlust/Heroism/Timewarp
+		-- CreateSpellEntry( 90355, true ), -- Ancient Hysteria, bloodlust from hunters pet
 		CreateSpellEntry( 26297 ), -- Berserking (troll racial)
 		CreateSpellEntry( 33702 ), CreateSpellEntry( 33697 ), CreateSpellEntry( 20572 ), -- Blood Fury (orc racial)
 		CreateSpellEntry( 57933 ), -- Tricks of Trade (15% dmg buff)
@@ -61,7 +61,7 @@ local TRINKET_FILTER = {
 		--Darkmoon Cards
 		CreateSpellEntry( 89181 ), -- Earthquake
 		CreateSpellEntry( 89182 ), -- Tsunami
-		CreateSpellEntry( 89091 ), -- Volcano
+		-- CreateSpellEntry( 89091 ), -- Volcano
 		
 		-- Blackwing Descent
 		CreateSpellEntry( 91322 ), -- Jar of Ancient Remedies Normal
@@ -73,9 +73,9 @@ local TRINKET_FILTER = {
 		--The Bastion of Twilight
 		CreateSpellEntry( 92126 ), -- Essence of the Cyclone Normal
 		CreateSpellEntry( 92351 ), -- Essence of the Cyclone Heroic
-		CreateSpellEntry( 91184 ), -- Fall of mortality
+		-- CreateSpellEntry( 91184 ), -- Fall of mortality
 		CreateSpellEntry( 92213 ), -- Vial of Stolen Memories
-		CreateSpellEntry( 91024 ), -- Theralion's Mirror
+		-- CreateSpellEntry( 91024 ), -- Theralion's Mirror
 		CreateSpellEntry( 91821 ), -- Crushing Weight
 		CreateSpellEntry( 91027 ), -- Heart of Ignacious Stacks
 		CreateSpellEntry( 91041 ), -- Heart of Ignacious on use
@@ -88,9 +88,9 @@ local TRINKET_FILTER = {
 		CreateSpellEntry( 90459 ), -- DPS set
 		
 		--Druid
-		CreateSpellEntry( 90159 ), -- Resto
-		CreateSpellEntry( 90163 ), -- Moonkin
-		CreateSpellEntry( 90165 ), -- Feral
+		-- CreateSpellEntry( 90159 ), -- Resto
+		-- CreateSpellEntry( 90163 ), -- Moonkin
+		-- CreateSpellEntry( 90165 ), -- Feral
 		
 		--Paladin
 		CreateSpellEntry( 90311 ), -- Holy
@@ -183,33 +183,33 @@ local CLASS_FILTERS = {
 			}		},
 		DRUID = { 
 			target = { 
-				CreateSpellEntry( 48438 ), -- Wild Growth
-				CreateSpellEntry( 774 ), -- Rejuvenation
-				CreateSpellEntry( 8936, false, nil, nil, 8936 ), -- Regrowth
-				CreateSpellEntry( 33763 ), -- Lifebloom
+				-- CreateSpellEntry( 48438 ), -- Wild Growth
+				-- CreateSpellEntry( 774 ), -- Rejuvenation
+				-- CreateSpellEntry( 8936, false, nil, nil, 8936 ), -- Regrowth
+				-- CreateSpellEntry( 33763 ), -- Lifebloom
 				CreateSpellEntry( 5570 ), -- Insect Swarm
 				CreateSpellEntry( 8921 ), -- Moonfire
 				CreateSpellEntry( 339 ), -- Entangling Roots
 				CreateSpellEntry( 33786 ), -- Cyclone
 				CreateSpellEntry( 2637 ), -- Hibernate
 				CreateSpellEntry( 2908 ), -- Soothe
-				CreateSpellEntry( 50259 ), -- Feral Charge (Cat) - daze
-				CreateSpellEntry( 45334 ), -- Feral Charge (Bear) - immobilize
-				CreateSpellEntry( 58180 ), -- Infected Wounds
-				CreateSpellEntry( 6795 ), -- Growl
-				CreateSpellEntry( 5209 ), -- Challenging Roar
-				CreateSpellEntry( 99 ), -- Demoralizing Roar
-				CreateSpellEntry( 33745 ), -- Lacerate
-				CreateSpellEntry( 5211 ), -- Bash
-				CreateSpellEntry( 80964 ), -- Skull Bash (Bear)
-				CreateSpellEntry( 80965 ), -- Skull Bash (Cat)
-				CreateSpellEntry( 22570 ), -- Maim
-				CreateSpellEntry( 1822 ), -- Rake
-				CreateSpellEntry( 1079 ), -- Rip
-				CreateSpellEntry( 33878, true ), -- Mangle (Bear)
-				CreateSpellEntry( 33876, true ), -- Mangle (Cat)
-				CreateSpellEntry( 9007 ), -- Pounce bleed
-				CreateSpellEntry( 9005 ), -- Pounce stun
+				-- CreateSpellEntry( 50259 ), -- Feral Charge (Cat) - daze
+				-- CreateSpellEntry( 45334 ), -- Feral Charge (Bear) - immobilize
+				-- CreateSpellEntry( 58180 ), -- Infected Wounds
+				-- CreateSpellEntry( 6795 ), -- Growl
+				-- CreateSpellEntry( 5209 ), -- Challenging Roar
+				-- CreateSpellEntry( 99 ), -- Demoralizing Roar
+				-- CreateSpellEntry( 33745 ), -- Lacerate
+				-- CreateSpellEntry( 5211 ), -- Bash
+				-- CreateSpellEntry( 80964 ), -- Skull Bash (Bear)
+				-- CreateSpellEntry( 80965 ), -- Skull Bash (Cat)
+				-- CreateSpellEntry( 22570 ), -- Maim
+				-- CreateSpellEntry( 1822 ), -- Rake
+				-- CreateSpellEntry( 1079 ), -- Rip
+				-- CreateSpellEntry( 33878, true ), -- Mangle (Bear)
+				-- CreateSpellEntry( 33876, true ), -- Mangle (Cat)
+				-- CreateSpellEntry( 9007 ), -- Pounce bleed
+				-- CreateSpellEntry( 9005 ), -- Pounce stun
 				CreateSpellEntry( 16857, true ), -- Faerie Fire (Feral)
 				CreateSpellEntry( 770, true ), -- Farie Fire
 				CreateSpellEntry( 91565, true), -- Farie Fire? :>
@@ -219,33 +219,33 @@ local CLASS_FILTERS = {
 			},
 			player = {
 				CreateSpellEntry( 48505 ), -- Starfall
-				CreateSpellEntry( 29166 ), -- Innervate
+				-- CreateSpellEntry( 29166 ), -- Innervate
 				CreateSpellEntry( 22812 ), -- Barkskin
-				CreateSpellEntry( 5215 ), -- Prowl
+				-- CreateSpellEntry( 5215 ), -- Prowl
 				CreateSpellEntry( 16689 ), -- Nature's Grasp
 				CreateSpellEntry( 17116 ), -- Nature's Swiftness
-				CreateSpellEntry( 5229 ), -- Enrage
-				CreateSpellEntry( 52610 ), -- Savage Roar
-				CreateSpellEntry( 5217 ), -- Tiger's Fury
+				-- CreateSpellEntry( 5229 ), -- Enrage
+				-- CreateSpellEntry( 52610 ), -- Savage Roar
+				-- CreateSpellEntry( 5217 ), -- Tiger's Fury
 				CreateSpellEntry( 1850 ), -- Dash
-				CreateSpellEntry( 22842 ), -- Frenzied Regeneration
-				CreateSpellEntry( 50334 ), -- Berserk
-				CreateSpellEntry( 61336 ), -- Survival Instincts
-				CreateSpellEntry( 48438 ), -- Wild Growth
-				CreateSpellEntry( 774 ), -- Rejuvenation
-				CreateSpellEntry( 8936, false, nil, nil, 8936 ), -- Regrowth
-				CreateSpellEntry( 33763 ), -- Lifebloom
-				CreateSpellEntry( 467 ), -- Thorns
-				CreateSpellEntry( 80951 ), -- Pulverize
+				-- CreateSpellEntry( 22842 ), -- Frenzied Regeneration
+				-- CreateSpellEntry( 50334 ), -- Berserk
+				-- CreateSpellEntry( 61336 ), -- Survival Instincts
+				-- CreateSpellEntry( 48438 ), -- Wild Growth
+				-- CreateSpellEntry( 774 ), -- Rejuvenation
+				-- CreateSpellEntry( 8936, false, nil, nil, 8936 ), -- Regrowth
+				-- CreateSpellEntry( 33763 ), -- Lifebloom
+				-- CreateSpellEntry( 467 ), -- Thorns
+				-- CreateSpellEntry( 80951 ), -- Pulverize
 			},
 			procs = {
-				CreateSpellEntry( 16870 ), -- Clearcasting
-				CreateSpellEntry( 48518 ), -- Eclipse Lunar
-				CreateSpellEntry( 48517 ), -- Eclipse Solar
-				CreateSpellEntry( 69369 ), -- Predator's Swiftness
-				CreateSpellEntry( 93400 ), -- Shooting Stars
-				CreateSpellEntry( 81006 ), CreateSpellEntry( 81191 ), CreateSpellEntry( 81192 ), -- Lunar Shower Rank 1/2/3
-				CreateSpellEntry( 16880 ), CreateSpellEntry( 61345 ), CreateSpellEntry( 61346 ), -- Nature's Grace Rank 1/2/3
+				-- CreateSpellEntry( 16870 ), -- Clearcasting
+				-- CreateSpellEntry( 48518 ), -- Eclipse Lunar
+				-- CreateSpellEntry( 48517 ), -- Eclipse Solar
+				-- CreateSpellEntry( 69369 ), -- Predator's Swiftness
+				-- CreateSpellEntry( 93400 ), -- Shooting Stars
+				-- CreateSpellEntry( 81006 ), CreateSpellEntry( 81191 ), CreateSpellEntry( 81192 ), -- Lunar Shower Rank 1/2/3
+				-- CreateSpellEntry( 16880 ), CreateSpellEntry( 61345 ), CreateSpellEntry( 61346 ), -- Nature's Grace Rank 1/2/3
  
 			},
 			procs = {		
@@ -445,12 +445,12 @@ local CLASS_FILTERS = {
 		},
 		SHAMAN = {
 			target = {
-				CreateSpellEntry( 974 ), -- Earth Shield
+				--CreateSpellEntry( 974 ), -- Earth Shield
 				CreateSpellEntry( 8050), -- Flame Shock
 				CreateSpellEntry( 8056 ), -- Frost Shock
 				CreateSpellEntry( 17364 ), -- Storm Strike
-				CreateSpellEntry( 61295 ), -- Riptide
-				CreateSpellEntry( 51945 ), -- Earthliving
+				--CreateSpellEntry( 61295 ), -- Riptide
+				--CreateSpellEntry( 51945 ), -- Earthliving
 				CreateSpellEntry( 77657 ), -- Searing Flames
 				CreateSpellEntry( 64701 ), -- Elemental Mastery
 			},
@@ -1148,7 +1148,7 @@ if C["unitframes"].charportrait == true then xOffset = -62 end
 local playerFrame = CreateAuraBarFrame( playerDataSource, TukuiPlayer );
 playerFrame:SetHiddenHeight( -yOffset );
 
-if C.unitframes.layout ~= 2 then
+if C.unitframes.layout == 1 then
 	if C.unitframes.largefocus then
 		playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, 6 )
 	else
@@ -1169,20 +1169,50 @@ else
 	playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
 	playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
 	
-	if T.myclass == "DRUID" then
-		if EclipseBarBorder:IsShown() then
-			playerFrame:Point("BOTTOMLEFT", EclipseBarBorder, "TOPLEFT", 2, 5)
-			playerFrame:Point("BOTTOMRIGHT", EclipseBarBorder, "TOPRIGHT", -2, 5)
+	TukuiFocus:HookScript("OnShow", function()
+		if C.unitframes.focusbuffs == true then
+			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
+			playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 32)
+			if TukuiFocusTarget:IsShown() then
+				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
+				playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 32)
+			end
+		else
+			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
+			playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 5)
+			if TukuiFocusTarget:IsShown() then
+				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
+				playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 5)
+			end
 		end
-		EclipseBarBorder:HookScript("OnShow", function(self)
-			playerFrame:Point("BOTTOMLEFT", self, "TOPLEFT", 2, 5)
-			playerFrame:Point("BOTTOMRIGHT", self, "TOPRIGHT", -2, 5)
-		end)
-		EclipseBarBorder:HookScript("OnHide", function(self)
-			playerFrame:Point("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 2, 5)
-			playerFrame:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", -2, 5)
-		end)
-	end
+	end)
+	TukuiFocus:HookScript("OnHide", function()
+		playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
+		playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
+	end)
+	TukuiFocusTarget:HookScript("OnHide", function()
+		if TukuiFocus:IsShown() then
+			if C.unitframes.focusbuffs == true then
+				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
+				playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 32)
+			else
+				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
+				playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 5)
+			end
+		else
+			playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
+			playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
+		end
+	end)
+	TukuiFocusTarget:HookScript("OnShow", function()
+		if C.unitframes.focusbuffs == true then
+			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
+			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 32)
+		else
+			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
+			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 5)
+		end
+	end)
 end
 
 local trinketFrame = CreateAuraBarFrame( trinketDataSource, TukuiPlayer )

@@ -93,6 +93,23 @@ T.DataTextTooltipAnchor = function(self)
 	return anchor, panel, xoff, yoff
 end
 
+T.DataBarPoint = function(p, obj)
+	obj:SetPoint("TOPRIGHT", T.databars[p], "TOPRIGHT", -2, -2)
+	obj:SetPoint("BOTTOMLEFT", T.databars[p], "BOTTOMLEFT", 2, 2)
+end
+
+T.DataBarTooltipAnchor = function(barNum)
+	local xoff = -T.databars[barNum]:GetWidth()
+	local yoff = T.Scale(-5)
+	
+	if C.databars.settings.vertical then
+		xoff = T.Scale(5)
+		yoff = T.databars[barNum]:GetHeight()
+	end
+	
+	return xoff, yoff
+end
+
 T.TukuiShiftBarUpdate = function()
 	local numForms = GetNumShapeshiftForms()
 	local texture, name, isActive, isCastable
@@ -214,6 +231,7 @@ T.buttonsize = T.Scale(C.actionbar.buttonsize)
 T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
 T.petbuttonsize = T.Scale(C.actionbar.petbuttonsize)
 T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
+T.hpetbuttonsize = T.Scale(20)
 
 T.TotemBarOrientation = function(revert)
 	local position = TukuiShiftBar:GetPoint()
@@ -303,15 +321,7 @@ T.cbSize = function()
 
 	local x = 4
 	if C.castbar.cbicons then x = 32 end
-	if C["actionbar"].petbarhorizontal == true then
-		if TukuiPetBar:IsShown() then
-			TukuiPlayerCastBar:Width(TukuiPetBar:GetWidth() - x)
-		else
-			TukuiPlayerCastBar:Width(TukuiBar2:GetWidth() - x)
-		end
-	else
-		TukuiPlayerCastBar:Width(TukuiBar2:GetWidth() - x)
-	end
+	TukuiPlayerCastBar:Width(TukuiBar2:GetWidth() - x)
 end
 
 -- Castbar Position
@@ -324,26 +334,10 @@ T.cbPosition = function()
 	if C.castbar.cbicons then x = 14 end
 	if TukuiDataPerChar.hidebar2 == true then
 		TukuiPlayerCastBar:ClearAllPoints()
-		if C["actionbar"].petbarhorizontal == true then
-			if TukuiPetBar:IsShown() then
-				TukuiPlayerCastBar:Point("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", -2, y)
-			else
-				TukuiPlayerCastBar:Point("BOTTOM", TukuiBar1, "TOP", x, y)
-			end
-		else
-			TukuiPlayerCastBar:Point("BOTTOM", TukuiBar1, "TOP", x, y)
-		end
+		TukuiPlayerCastBar:Point("BOTTOM", TukuiBar1, "TOP", x, y)
 	else
 		TukuiPlayerCastBar:ClearAllPoints()
-		if C["actionbar"].petbarhorizontal == true then
-			if TukuiPetBar:IsShown() then
-				TukuiPlayerCastBar:Point("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", -2, y)
-			else
-				TukuiPlayerCastBar:Point("BOTTOMRIGHT", TukuiBar2, "TOPRIGHT", -2, y)
-			end
-		else
-			TukuiPlayerCastBar:Point("BOTTOMRIGHT", TukuiBar2, "TOPRIGHT", -2, y)
-		end
+		TukuiPlayerCastBar:Point("BOTTOMRIGHT", TukuiBar2, "TOPRIGHT", -2, y)
 	end
 end
 
@@ -356,6 +350,17 @@ if C["actionbar"].petbarhorizontal ~= true or InCombatLockdown() then return end
 	else
 		TukuiPetBar:Point("BOTTOM", TukuiBar2, "TOP", 0, 4)
 	end
+end
+
+function T.CommaValue(amount)
+	local formatted = amount
+	while true do  
+		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+		if (k==0) then
+			break
+		end
+	end
+	return formatted
 end
 ------------------------------------------------------------------------
 --	unitframes Functions

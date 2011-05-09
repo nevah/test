@@ -1,5 +1,8 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
+local cp = "|cff319f1b" -- +
+local cm = "|cff9a1212" -- -
+
 if C.Addon_Skins.background then
 	-- Addons Background (same size as right chat background)
 	local bg = CreateFrame("Frame", "AddonBGPanel", UIParent)
@@ -19,21 +22,23 @@ if C.Addon_Skins.background then
 
 		bgtab:ClearAllPoints()
 		bgtab:Point("TOPLEFT", bg, "TOPLEFT", 5, -5)
-		bgtab:Point("TOPRIGHT", bg, "TOPRIGHT", -28, -5)
+		bgtab:Point("TOPRIGHT", bg, "TOPRIGHT", -5, -5)
+		--bgtab:Hide()
 		
-		local bgc = CreateFrame("Frame", nil, bgtab)
-		bgc:CreatePanel("Transparent", 20, 20, "LEFT", bgtab, "RIGHT", 3, 0)
+		local bgc = CreateFrame("Frame", nil, bg)
+		bgc:CreatePanel("Default", 1, 18, "BOTTOM", bg, "TOP", 0, 0)
 		bgc:CreateShadow("Default")
-		bgc:SetFrameStrata("HIGH")
-		bgc:SetFrameLevel(10)
+		bgc:Point("BOTTOMRIGHT", bg, "TOPRIGHT", 0, 28)
+		bgc:Point("BOTTOMLEFT", bg, "TOPLEFT", 0, 28)
+		bgc:SetAlpha(0)
 		
 		bgc.t = bgc:CreateFontString(nil, "OVERLAY")
 		bgc.t:SetPoint("CENTER")
 		bgc.t:SetFont(C.datatext.font, C.datatext.fontsize)
-		bgc.t:SetText(T.panelcolor.."T")
+		bgc.t:SetText(cm.."Trade Chat|r")
 		
-		bgc:SetScript("OnEnter", function() bgc.t:SetText("T") end)
-		bgc:SetScript("OnLeave", function() bgc.t:SetText(T.panelcolor.."T") end)
+		bgc:SetScript("OnEnter", function() bgc:SetAlpha(1) end)
+		bgc:SetScript("OnLeave", function() bgc:SetAlpha(0) end)
 			
 		bgc:SetScript("OnMouseDown", function(self) 
 			ChatBG2:Show() 

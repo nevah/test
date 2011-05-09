@@ -127,9 +127,17 @@ oUF:Factory(function(self)
 		"yOffset", T.Scale(8),
 		"point", "BOTTOM"
 	)
-	if ChatBG1 then
-		raid:Point("BOTTOMLEFT", ChatBG1, "TOPLEFT", 2, 6)
+	if C.panels.switchchats == true and C.panels.switchdatatext == true then	
+		if TukuiInfoRight then
+			raid:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 2, 6)
+		else
+			raid:Point("BOTTOMLEFT", ChatFrame4, "TOPLEFT", 2, 21)
+		end
 	else
-		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 21)
+		if TukuiInfoLeft then
+			raid:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 2, 6)
+		else
+			raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 21)
+		end
 	end
 end)

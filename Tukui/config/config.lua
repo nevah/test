@@ -12,20 +12,26 @@ C["general"] = {
 	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
 }
 
+C["panels"] = {
+	["switchchats"] = false,							-- Switchs loot and meters with chat frame 1's location (REQUIRES /RESETUI)
+		["switchdatatext"] = false,						-- (Only works if ["switchchats"] = true) Switch the attached datatext with the chat.
+
+}
+
 C["unitframes"] = {
-	["layout"] = 2,										-- Layout 1 or 2
+	["layout"] = 3,										-- Layout 3 is what to use. 1 and 2 are from duffed and are untested in this UI.
 
 	["fontsize"] = 8,									-- Fontsize on Unitframes
 	["healthbarcolor"] = {.2, .2, .2, 1},				-- Healthbar color (if unicolor = true) 
-	["deficitcolor"] = {0, 0, 0},						-- Healthbar deficit color (if unicolor = true)
+	["deficitcolor"] = {(178/225), (34/225), (34/225)},	-- Healthbar deficit color (if unicolor = true) (FIREBRICK > all)
 	["totandpetlines"] = true,							-- Show the small Lines on pet & Target of Target
 	["priestarmor"] = false,							-- Display which Armor is currently up on ur priest
 	["framewidth"] = 218,								-- Width of Player & Target Frame (affect also arena- & bossframes)
-	["vengeancebar"] = false,							-- Display a Vengeance-Bar instead of Threat-Bar at the right info panel
+	["vengeancebar"] = true,							-- Display a Vengeance-Bar instead of Threat-Bar at the right info panel
 	["fader"] = false,									-- EXPERIMENTAL (cause i didnt really test it :) - Fade Unitframes out when ooc etc.
 		["fader_alpha"] = 1,							-- alpha for frames if you're not in combat but hp is < 100% and some more conditions
-	["largefocus"] = false,								-- Use larger Focus Frame
-	["gridpets"] = true,								-- show pets in grid layout (only in group, not raid)
+	["largefocus"] = true,								-- Use larger Focus Frame (RECOMENDED still not done with small ones :P)
+	["gridpets"] = false,								-- show pets in grid layout (only in group, not raid)
 	["gridvertical"] = false,							-- Grid direction vertical instead of horizontal
 	["gridsolo"] = false,								-- Show Grid even without a group (solo)
 	["focusdebuffs"] = true,							-- display focus debuffs
@@ -42,6 +48,7 @@ C["unitframes"] = {
 	["auratextscale"] = 8,                             -- the font size of buffs/debuffs timers on unitframes
 	["playerauras"] = false,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
+	["focusbuffs"] = false,
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
 	["totdebuffs"] = true,                             -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
@@ -62,7 +69,7 @@ C["unitframes"] = {
 	["showsymbols"] = true,	                            -- show symbol.
 	["aggro"] = true,                                   -- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
-	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
+	["gridhealthvertical"] = false,                      -- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = true,                      	-- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
 	
@@ -88,19 +95,19 @@ C["castbar"] = {
 
 C["actionbar"] = {
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
+	["disablebar2"] = false,							-- Turn Bar 2 on/off
 	["rightbarsmouseover"] = true, 						-- Right Bars on mouseover
-	["shapeshiftborder"] = true,						-- Create a Border around the shapeshift buttons
 	["shapeshiftmouseover"] = false,					-- Shapeshiftbar on mouseover
-	["macrotext"] = false,								-- display macro text on buttons
+	["macrotext"] = true,								-- display macro text on buttons
 	["petbaralwaysvisible"] = true,						-- Always show petbar even if rightbarsmouseover = true
-	["petbarhorizontal"] = false,						-- Petbar horizontal on top of Bar1/2
+	["petbarhorizontal"] = true,						-- Petbar horizontal on top of Bar1/2
 
 	["enable"] = true,                                  -- enable tukui action bars
-	["hotkey"] = false,                                 -- enable hotkey display because it was a lot requested
+	["hotkey"] = true,                                  -- enable hotkey display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
 	["showgrid"] = true,                                -- show grid on empty button
 	["buttonsize"] = 27,                                -- normal buttons size
-	["petbuttonsize"] = 29,                             -- pet & stance buttons size
+	["petbuttonsize"] = 29,                             -- pet & stance buttons size (Does NOT effect HORIZONTAL pet bar)
 	["buttonspacing"] = 4,                              -- buttons spacing
 }
 
@@ -118,7 +125,7 @@ C["pvp"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = false,								-- Create a Panel that has the exactly same size as the left chat, placed at the bottomright (for addon placement)
+	["background"] = true,								-- Create a Panel that has the exactly same size as the left chat, placed at the bottomright (for addon placement)
 		["combat_toggle"] = false,						-- Shows the Addon Background, Omen, Recount & Skada infight, hides outfight
 	["Recount"] = true,									-- Enable Recount Skin
 	["Skada"] = true,									-- Enable Skada Skin
@@ -177,29 +184,30 @@ C["datatext"] = {
 	["zonepanel"] = false,								-- Show Panel with ur current Zone instead of mouseover on minimap
 	["mmenu"] = 0,										-- shows mMenu datatext (required: mMenu AddOn)
 	["experience"] = 0,
-	["reputation"] = 5,
+	["reputation"] = 0,
 	["honor"] = 0,
 	["honorablekills"] = 0,
 	
-	["fps_ms"] = 2,                                     -- show fps and ms on panels
+	["fps_ms"] = 0,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels
-	["gold"] = 6,                                       -- show your current gold on panels
+	["gold"] = 2,                                       -- show your current gold on panels
 	["wowtime"] = 8,                                    -- show time on panels
 	["guild"] = 1,                                      -- show number on guildmate connected on panels
-	["dur"] = 4,                                        -- show your equipment durability on panels.
+	["dur"] = 0,                                        -- show your equipment durability on panels.
 	["friends"] = 3,                                    -- show number of friends connected.
 	["dps_text"] = 0,                                   -- show a dps meter on panels
 	["hps_text"] = 0,                                   -- show a heal meter on panels
-	["power"] = 7,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
-	["haste"] = 0,                                      -- show your haste rating on panels.
+	["power"] = 0,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
+	["haste"] = 4,                                      -- show your haste rating on panels.
 	["crit"] = 0,                                       -- show your crit rating on panels.
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                   -- show your tracked currency on panels.
-	["hit"] = 0,										-- show your current hit rating on panels.
-	["mastery"] = 0,									-- show your current mastery rating on panels.
-	["micromenu"] = 0,									-- Micromenu on panels (toggle the same menu as on minimap).
+	["hit"] = 6,										-- show your current hit rating on panels.
+	["mastery"] = 5,									-- show your current mastery rating on panels.
+	["micromenu"] = 7,									-- Micromenu on panels (toggle the same menu as on minimap).
+	["regen"] = 0,
 	["regen"] = 0,
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
@@ -207,6 +215,23 @@ C["datatext"] = {
 	["localtime"] = false,                              -- set time to local time instead of server time.
 	["font"] = [[Interface\AddOns\Tukui\medias\fonts\uf_font.ttf]],
 	["fontsize"] = 8,                                  -- font size for panels.
+}
+
+C["databars"] = {
+	["settings"] = {
+		["height"] = 20,									-- set the height of the bars
+		["width"] = 100,									-- set the width of the bars
+		["spacing"] = 3,									-- amount of spacing between bars
+		["padding"] = 3,									-- amount of space between sections (skip a number to make a new "section", e.g. fps:3, latency:4, memory:5, bags:7)
+	},
+	["framerate"] = 3,
+	["latency"] = 4,
+	["memory"] = 5,
+	["bags"] = 2,
+	["exp_rep"] = 1,
+	["durability"] = 6,
+	["currency"] = 7,
+	["talents"] = 0,
 }
 
 C["chat"] = {
@@ -223,8 +248,8 @@ C["nameplate"] = {
 	["classicons"] = false,
 
 	["enable"] = true,                                  -- enable nice skinned nameplates that fit into tukui
-	["showhealth"] = false,				                -- show health text on nameplate
-	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
+	["showhealth"] = true,				                -- show health text on nameplate
+	["enhancethreat"] = true,			                -- threat features based on if your a tank or not
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
 	["goodcolor"] = {75/255,  175/255, 76/255},	        -- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
@@ -232,7 +257,7 @@ C["nameplate"] = {
 }
 
 C["tooltip"] = {
-	["showspellid"] = false,
+	["showspellid"] = true,
 
 	["enable"] = true,                                  -- true to enable this mod, false to disable
 	["hidecombat"] = false,                             -- hide bottom-right tooltip when in combat
