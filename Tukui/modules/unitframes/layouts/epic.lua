@@ -609,7 +609,78 @@ local function Shared(self, unit)
 					TotemShadow:SetPoint("BOTTOMRIGHT", TukuiPlayer_TotemBar4, "BOTTOMRIGHT", 2, -2)
 					TotemShadow:CreateShadow("Default")
 					
-					self.TotemBar = TotemBar
+					self.TotemBar = TotemBar	
+
+				-- ShammyShield
+				local bartest = CreateFrame("StatusBar", "bartest", self)
+				bartest:Point("BOTTOMRIGHT", health, "TOPLEFT", -7, 7)
+				bartest:Size(47, 5)
+				bartest:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+				bartest:SetStatusBarTexture(normTex)
+				bartest:SetOrientation("HORIZONTAL")
+				bartest:SetMinMaxValues(0, 1)
+				bartest:SetValue(0)
+
+				bartest.bg = bartest:CreateTexture(nil, "BORDER")
+				bartest.bg:SetAllPoints(bartest)
+				bartest.bg:SetTexture(.2,.2,.2)
+				bartest.bg.multiplier = 0.2
+
+				-- border
+				bartest.border = CreateFrame("Frame", nil, bartest)
+				bartest.border:CreatePanel("Default", 1, 1,"TOPLEFT", bartest, "TOPLEFT", -2, 2)
+				bartest.border:Point("BOTTOMRIGHT", 2, -2)
+				bartest:RegisterEvent("UNIT_AURA")	
+				bartest:SetScript("OnEvent", function()
+				if UnitAura("player", "Water Shield") or UnitAura("player", "Earth Shield") or UnitAura("player", "Lightning Shield") then
+					for index = 1, 40 do
+						local name,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", index)
+						if name == "Water Shield" then
+							bartest:SetValue(1)
+							bartest:SetStatusBarColor((0/255),(191/255),(225/255))
+							bartest:SetScript("OnUpdate", function()
+								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
+								local time = GetTime()
+								local remaining = expirationTime - time
+									if (time > expirationTime) then
+										bartest:SetValue(0)
+									else
+										bartest:SetValue(remaining/duration)
+									end
+							end)
+						elseif name == "Lightning Shield" then
+							bartest:SetValue(1)
+							bartest:SetStatusBarColor((85/255),(10/255),(130/255))
+							bartest:SetScript("OnUpdate", function()
+								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
+								local time = GetTime()
+								local remaining = expirationTime - time
+									if (time > expirationTime) then
+										bartest:SetValue(0)
+									else
+										bartest:SetValue(remaining/duration)
+									end
+							end)
+						elseif name == "Earth Shield" then
+							bartest:SetValue(1)
+							bartest:SetStatusBarColor((184/255),(134/255),(11/255))
+							bartest:SetScript("OnUpdate", function()
+								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
+								local time = GetTime()
+								local remaining = expirationTime - time
+									if (time > expirationTime) then
+										bartest:SetValue(0)
+									else
+										bartest:SetValue(remaining/duration)
+									end
+							end)							
+						end	
+					end
+				else
+					bartest:SetValue(0)
+					bartest:SetScript("OnUpdate", nil)
+				end
+				end)
 				end
 			end
 			

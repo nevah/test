@@ -347,6 +347,3 @@ if (TukuiDB.myclass == "DRUID") then
 		end
 	end)
 end
-		
-		
-

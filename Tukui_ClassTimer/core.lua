@@ -455,9 +455,9 @@ local CLASS_FILTERS = {
 				CreateSpellEntry( 64701 ), -- Elemental Mastery
 			},
 				player = {
-				CreateSpellEntry( 324 ), -- Lightning Shield
-				CreateSpellEntry( 52127 ), -- Water Shield
-				CreateSpellEntry( 974 ), -- Earth Shield
+				--CreateSpellEntry( 324 ), -- Lightning Shield
+				--CreateSpellEntry( 52127 ), -- Water Shield
+				--CreateSpellEntry( 974 ), -- Earth Shield
 				CreateSpellEntry( 30823 ), -- Shamanistic Rage
 				CreateSpellEntry( 55198 ), -- Tidal Force
 				CreateSpellEntry( 61295 ), -- Riptide
