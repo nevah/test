@@ -623,21 +623,23 @@ local function Shared(self, unit)
 
 				bartest.bg = bartest:CreateTexture(nil, "BORDER")
 				bartest.bg:SetAllPoints(bartest)
-				bartest.bg:SetTexture(.2,.2,.2)
+				bartest.bg:SetTexture(.02,.02,.02)
 				bartest.bg.multiplier = 0.2
 
 				-- border
 				bartest.border = CreateFrame("Frame", nil, bartest)
 				bartest.border:CreatePanel("Default", 1, 1,"TOPLEFT", bartest, "TOPLEFT", -2, 2)
 				bartest.border:Point("BOTTOMRIGHT", 2, -2)
-				bartest:RegisterEvent("UNIT_AURA")	
+				bartest:RegisterEvent("UNIT_AURA")
+				bartest:RegisterEvent("PLAYER_ENTERING_WORLD")	
 				bartest:SetScript("OnEvent", function()
 				if UnitAura("player", "Water Shield") or UnitAura("player", "Earth Shield") or UnitAura("player", "Lightning Shield") then
 					for index = 1, 40 do
 						local name,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", index)
 						if name == "Water Shield" then
 							bartest:SetValue(1)
-							bartest:SetStatusBarColor((0/255),(191/255),(225/255))
+							bartest.bg:SetTexture(.02,.02,.02)
+							bartest:SetStatusBarColor(.19,.48,.60)
 							bartest:SetScript("OnUpdate", function()
 								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
 								local time = GetTime()
@@ -650,7 +652,8 @@ local function Shared(self, unit)
 							end)
 						elseif name == "Lightning Shield" then
 							bartest:SetValue(1)
-							bartest:SetStatusBarColor((85/255),(10/255),(130/255))
+							bartest.bg:SetTexture(.02,.02,.02)
+							bartest:SetStatusBarColor(.42,.18,.74)
 							bartest:SetScript("OnUpdate", function()
 								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
 								local time = GetTime()
@@ -663,6 +666,7 @@ local function Shared(self, unit)
 							end)
 						elseif name == "Earth Shield" then
 							bartest:SetValue(1)
+							bartest.bg:SetTexture(.02,.02,.02)
 							bartest:SetStatusBarColor((184/255),(134/255),(11/255))
 							bartest:SetScript("OnUpdate", function()
 								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
@@ -677,6 +681,7 @@ local function Shared(self, unit)
 						end	
 					end
 				else
+					bartest.bg:SetTexture((178/225), (34/225), (34/225))
 					bartest:SetValue(0)
 					bartest:SetScript("OnUpdate", nil)
 				end
