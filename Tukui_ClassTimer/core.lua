@@ -1213,6 +1213,10 @@ else
 			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 5)
 		end
 	end)
+	if T.myclass == "DRUID" then
+		playerFrame:Point("BOTTOMLEFT", EclipseBar, "TOPLEFT", 0, 45)
+		playerFrame:Point("BOTTOMRIGHT", EclipseBar, "TOPRIGHT", 0, 45)
+	end
 end
 
 local trinketFrame = CreateAuraBarFrame( trinketDataSource, TukuiPlayer )

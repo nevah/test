@@ -612,78 +612,78 @@ local function Shared(self, unit)
 					self.TotemBar = TotemBar	
 
 				-- ShammyShield
-				local bartest = CreateFrame("StatusBar", "bartest", self)
-				bartest:Point("BOTTOMRIGHT", health, "TOPLEFT", -7, 7)
-				bartest:Size(47, 5)
-				bartest:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-				bartest:SetStatusBarTexture(normTex)
-				bartest:SetOrientation("HORIZONTAL")
-				bartest:SetMinMaxValues(0, 1)
-				bartest:SetValue(0)
+				local ss = CreateFrame("StatusBar", "Shammy Shield", self)
+				ss:Point("BOTTOMRIGHT", health, "TOPLEFT", -7, 7)
+				ss:Size(47, 5)
+				ss:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+				ss:SetStatusBarTexture(normTex)
+				ss:SetOrientation("HORIZONTAL")
+				ss:SetMinMaxValues(0, 1)
 
-				bartest.bg = bartest:CreateTexture(nil, "BORDER")
-				bartest.bg:SetAllPoints(bartest)
-				bartest.bg:SetTexture(.02,.02,.02)
-				bartest.bg.multiplier = 0.2
+				ss.bg = ss:CreateTexture(nil, "BORDER")
+				ss.bg:SetAllPoints(ss)
+				ss.bg:SetTexture(.02,.02,.02)
+				ss.bg.multiplier = 0.2
 
 				-- border
-				bartest.border = CreateFrame("Frame", nil, bartest)
-				bartest.border:CreatePanel("Default", 1, 1,"TOPLEFT", bartest, "TOPLEFT", -2, 2)
-				bartest.border:Point("BOTTOMRIGHT", 2, -2)
-				bartest:RegisterEvent("UNIT_AURA")
-				bartest:RegisterEvent("PLAYER_ENTERING_WORLD")	
-				bartest:SetScript("OnEvent", function()
+				ss.border = CreateFrame("Frame", nil, ss)
+				ss.border:CreatePanel("Default", 1, 1,"TOPLEFT", ss, "TOPLEFT", -2, 2)
+				ss.border:Point("BOTTOMRIGHT", 2, -2)
+				ss.border:CreateShadow("Default")				
+				ss:RegisterEvent("UNIT_AURA")
+				ss:RegisterEvent("PLAYER_ENTERING_WORLD")	
+				ss:SetScript("OnEvent", function()
 				if UnitAura("player", "Water Shield") or UnitAura("player", "Earth Shield") or UnitAura("player", "Lightning Shield") then
 					for index = 1, 40 do
 						local name,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", index)
 						if name == "Water Shield" then
-							bartest:SetValue(1)
-							bartest.bg:SetTexture(.02,.02,.02)
-							bartest:SetStatusBarColor(.19,.48,.60)
-							bartest:SetScript("OnUpdate", function()
+							ss:SetValue(1)
+							ss.bg:SetTexture(.02,.02,.02)
+							ss:SetStatusBarColor(.19,.48,.60)
+							ss:SetScript("OnUpdate", function()
 								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
 								local time = GetTime()
 								local remaining = expirationTime - time
 									if (time > expirationTime) then
-										bartest:SetValue(0)
+										ss:SetValue(0)
 									else
-										bartest:SetValue(remaining/duration)
+										ss:SetValue(remaining/duration)
 									end
 							end)
 						elseif name == "Lightning Shield" then
-							bartest:SetValue(1)
-							bartest.bg:SetTexture(.02,.02,.02)
-							bartest:SetStatusBarColor(.42,.18,.74)
-							bartest:SetScript("OnUpdate", function()
+							ss:SetValue(1)
+							ss.bg:SetTexture(.02,.02,.02)
+							ss:SetStatusBarColor(.42,.18,.74)
+							ss:SetScript("OnUpdate", function()
 								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
 								local time = GetTime()
 								local remaining = expirationTime - time
 									if (time > expirationTime) then
-										bartest:SetValue(0)
+										ss:SetValue(0)
 									else
-										bartest:SetValue(remaining/duration)
+										ss:SetValue(remaining/duration)
 									end
 							end)
 						elseif name == "Earth Shield" then
-							bartest:SetValue(1)
-							bartest.bg:SetTexture(.02,.02,.02)
-							bartest:SetStatusBarColor((184/255),(134/255),(11/255))
-							bartest:SetScript("OnUpdate", function()
+							ss:SetValue(1)
+							ss.bg:SetTexture(.02,.02,.02)
+							ss:SetStatusBarColor((184/255),(134/255),(11/255))
+							ss:SetScript("OnUpdate", function()
 								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
 								local time = GetTime()
 								local remaining = expirationTime - time
 									if (time > expirationTime) then
-										bartest:SetValue(0)
+										ss:SetValue(0)
 									else
-										bartest:SetValue(remaining/duration)
+										ss:SetValue(remaining/duration)
 									end
 							end)							
 						end	
 					end
 				else
-					bartest.bg:SetTexture((178/225), (34/225), (34/225))
-					bartest:SetValue(0)
-					bartest:SetScript("OnUpdate", nil)
+					ss.bg:SetTexture((178/225), (34/225), (34/225))
+					ss:SetValue(0)
+					ss:SetScript("OnUpdate", nil)
 				end
 				end)
 				end
