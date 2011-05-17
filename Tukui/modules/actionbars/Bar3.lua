@@ -6,7 +6,7 @@ if not C["actionbar"].enable == true then return end
 ---------------------------------------------------------------------------
 
 local bar = TukuiBar2
-if C["actionbar"].swapbar1and3 then bar = TukuiBar1 end
+if C.actionbar.swapbar1and3 then bar = TukuiBar1 end
 MultiBarBottomRight:SetParent(bar)
 
 for i= 1, 12 do

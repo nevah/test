@@ -396,14 +396,14 @@ function Stuffing:CreateBagFrame(w)
 	f:CreateShadow("Default")
 
 	if w == "Bank" then
-		if ChatBG1 then
-			f:Point("BOTTOMRIGHT", ChatBG1, "TOPRIGHT", 0, 5)
+		if TukuiInfoLeft then
+			f:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 0, 5)
 		else
 			f:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 145,7)
 		end
 	else
-		if ChatBG2 then
-			f:Point("BOTTOMLEFT", ChatBG2, "TOPLEFT", 0, 5)
+		if TukuiInfoRight then
+			f:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, 5)
 		else
 			f:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -145, 7)
 		end

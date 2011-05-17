@@ -125,6 +125,7 @@
 	<Script file="modules\actionbars\Others.lua"/>
 	<Script file="modules\actionbars\Cooldowns.lua"/>	
 	<Script file="modules\actionbars\functions.lua"/>
+	<Script file="modules\actionbars\customactionbar.lua"/>
 	
 	<Script file="modules\chat\chatframes.lua"/>
 	<Script file="modules\chat\telltarget.lua"/>

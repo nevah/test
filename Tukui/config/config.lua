@@ -94,11 +94,13 @@ C["castbar"] = {
 }
 
 C["actionbar"] = {
+	["style"] = 2,										-- Bar Style
+	
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
 	["rightbarsmouseover"] = true, 						-- Right Bars on mouseover
 	["shapeshiftmouseover"] = false,					-- Shapeshiftbar on mouseover
-	["macrotext"] = true,								-- display macro text on buttons
+	["macrotext"] = false,								-- display macro text on buttons
 	["petbaralwaysvisible"] = true,						-- Always show petbar even if rightbarsmouseover = true
 	["petbarhorizontal"] = true,						-- Petbar horizontal on top of Bar1/2
 

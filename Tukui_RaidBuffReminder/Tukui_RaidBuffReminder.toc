@@ -1,0 +1,8 @@
+## Interface: 40000
+## Author: Elv
+## Version: 1.0.2
+## Title: |cffC495DDTukui|r Raid Buff Reminder
+## Notes: Personal raid buff reminder module for Tukui.
+## RequiredDeps: Tukui
+
+core.lua

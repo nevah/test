@@ -63,6 +63,8 @@ local PlateBlacklist = {
 	["Venomous Snake"] = true,
 	["Viper"] = true,
 
+	-- Stupid Magmaw
+	["Lava Parasites"] = true,
 	--Test
 	--["Unbound Seer"] = true,
 }
