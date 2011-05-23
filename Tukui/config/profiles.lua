@@ -17,12 +17,14 @@ end
 if T.myname == "Epicgrim" then
 	C.actionbar.hideshapeshift = true
 	C.unitframes.classbar = false
-	C.actionbar.custombar.spells = {"Regrowth", "Rebirth", "Innervate", "Swiftmend"}
+end
+
+if T.myname == "Epicelement" then
+	C.actionbar.custombar.spells = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
 end
 
 if T.myname == "Epicshot" then
 	C.swingtimer.enable = true
-	--C.actionbar.custombar.spells = {"Ice Trap", "Mend Pet"}
 end
 
 if T.myname == "Epicgoose" then

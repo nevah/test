@@ -94,7 +94,7 @@ C["castbar"] = {
 C["actionbar"] = {
 	["custombar"] = {								
 		["enable"] = true,								-- Herp
-		["spells"] = {},								-- Setup in the profiles.lua either based on class or toon name
+		["spells"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 	},
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
