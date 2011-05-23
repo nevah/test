@@ -1,18 +1,29 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+-- EXAMPLE CUSTOMBAR SETUP - C.actionbar.custombar.spells = {"Regrowth", "Rebirth"}
 ----------------------------------------------------------------------------
 -- Per Class Config (overwrite general)
 -- Class need to be UPPERCASE
 ----------------------------------------------------------------------------
 
 if T.myclass == "DRUID" then
-		C.actionbar.hideshapeshift = true
-		C.unitframes.classbar = false
+--some config
 end
 
 ----------------------------------------------------------------------------
 -- Per Character Name Config (overwrite general and class)
 -- Name need to be case sensitive
 ----------------------------------------------------------------------------
+
+if T.myname == "Epicgrim" then
+	C.actionbar.hideshapeshift = true
+	C.unitframes.classbar = false
+	C.actionbar.custombar.spells = {"Regrowth", "Rebirth", "Innervate", "Swiftmend"}
+end
+
+if T.myname == "Epicshot" then
+	C.swingtimer.enable = true
+	C.actionbar.custombar.spells = {"Ice Trap", "Mend Pet"}
+end
 
 if T.myname == "Epicgoose" then
 	C.swingtimer.enable = true

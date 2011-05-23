@@ -261,7 +261,60 @@ local function Shared(self, unit)
 		end
 			
 		if (unit == "player") then
-					
+			-- custom action bar (add spells in the profiles.lua)
+						
+			local custombar = CreateFrame("Frame", "CustomTukuiActionBar", UIParent, "SecureHandlerStateTemplate")
+			custombar:CreatePanel("Default", 1, 39, "TOPLEFT", power.border, "BOTTOMLEFT", 0, -6)
+				custombarline1 = CreateFrame("Frame", nil, custombar)
+				custombarline1:CreatePanel("Default", 2, 5, "BOTTOMRIGHT", custombar, "TOPRIGHT", -15, 0)
+				custombarline1:SetFrameStrata("BACKGROUND")
+				
+				custombarline2 = CreateFrame("Frame", nil, custombar)
+				custombarline2:CreatePanel("Default", 2, 5, "BOTTOMLEFT", custombar, "TOPLEFT", 15, 0)
+				custombarline2:SetFrameStrata("BACKGROUND")
+			local custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
+			for i, v in ipairs(C.actionbar.custombar.spells) do
+				custombutton[i] = CreateFrame("Button", "CustomButton"..i, custombar, "SecureActionButtonTemplate")
+				custombutton[i]:CreatePanel("Default", 35, 35, "TOPLEFT", custombar, "TOPLEFT", 2, -2)
+				custombutton[i]:SetAttribute("type", "spell");
+				custombutton[i]:SetAttribute("spell", C.actionbar.custombar.spells[i])
+				if i ~= 1 then
+					custombutton[i]:SetPoint("TOPLEFT", custombutton[i-1], "TOPRIGHT", 2, 0)
+				end
+				custombutton[i].texture = custombutton[i]:CreateTexture(nil, "BORDER")
+				custombutton[i].texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+				custombutton[i].texture:SetPoint("TOPLEFT", custombutton[i] ,"TOPLEFT", 2, -2)
+				custombutton[i].texture:SetPoint("BOTTOMRIGHT", custombutton[i] ,"BOTTOMRIGHT", -2, 2)
+				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(C.actionbar.custombar.spells[i])))
+				
+				custombutton[i].value = custombutton[i]:CreateFontString(nil, "ARTWORK")
+				custombutton[i].value:SetFont(C["media"].font, 15, "OUTLINE")
+				custombutton[i].value:SetTextColor(1, 0, 0)
+				custombutton[i].value:SetShadowColor(0, 0, 0, 0.5)
+				custombutton[i].value:SetShadowOffset(2, -2)
+				custombutton[i].value:Point("CENTER", custombutton[i], "CENTER")
+				custombutton[i]:SetScript("OnUpdate", function()
+					local start, duration, enabled = GetSpellCooldown(C.actionbar.custombar.spells[i])
+					local time = GetTime()
+					local expirationTime = start + duration
+					local remaining = expirationTime - time
+					if expirationTime > 0 then
+						custombutton[i].value:Show()
+						if remaining >= 60 then
+							custombutton[i].value:SetFormattedText("%d:%.2d", remaining/60, remaining%60)
+						elseif remaining >= 10 then
+							custombutton[i].value:SetFormattedText("%d", remaining)
+						else
+							custombutton[i].value:SetFormattedText("%.1f", remaining)
+						end
+					else 
+						custombutton[i].value:Hide()
+					end
+				end)
+			end
+			local totalspells = table.getn(C.actionbar.custombar.spells)
+			custombar:SetWidth(totalspells*35 + (totalspells+1)*2)
+			
 			-- combat icon
 			local Combat = health:CreateTexture(nil, "OVERLAY")
 			Combat:Height(15)
@@ -1860,6 +1913,21 @@ if C["unitframes"].mainassist == true then
 		assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	end
 end
+
+--------------------------
+--custom AB move function
+--------------------------
+if TukuiPet:IsShown() then
+	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
+else
+	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -16)
+end
+TukuiPet:HookScript("OnShow", function()
+	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
+end)
+TukuiPet:HookScript("OnHide", function()
+	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -16)
+end)
 
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)

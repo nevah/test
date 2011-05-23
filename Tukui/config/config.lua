@@ -35,6 +35,7 @@ C["unitframes"] = {
 	["gridvertical"] = false,							-- Grid direction vertical instead of horizontal
 	["gridsolo"] = false,								-- Show Grid even without a group (solo)
 	["focusdebuffs"] = true,							-- display focus debuffs
+	["focusbuffs"] = false,								-- buff Above focus
 	["buffrows"] = 1,									-- Buff rows above Target (and Player if u enable it)
 	["debuffrows"] = 2, 								-- Debuff rows above Target (and Player if u enable it)
 	["portraitstyle"] = "ICON",							-- "ICON" or "MODEL" (Layout 2 only)
@@ -48,7 +49,6 @@ C["unitframes"] = {
 	["auratextscale"] = 8,                             -- the font size of buffs/debuffs timers on unitframes
 	["playerauras"] = false,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
-	["focusbuffs"] = false,
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
 	["totdebuffs"] = true,                             -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
@@ -89,16 +89,16 @@ C["castbar"] = {
 	["cblatency"] = false,                              -- enable castbar latency
 	["classcolored"] = true,
 		["color"] = { 0.9, 0.9, 0.9, 0.9 },				-- Castbar color for everything except player (if classcolored = false)
-	["target-y-offset"] = 380,							-- Target Castbar offset from the BOTTOM
-	["focus-y-offset"] = -320,							-- Focus Castbar offset from the TOP
 }
 
 C["actionbar"] = {
-	["style"] = 2,										-- Bar Style
-	
+	["custombar"] = {								
+		["enable"] = true,								-- Herp
+		["spells"] = {},								-- Setup in the profiles.lua either based on class or toon name
+	},
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
-	["rightbarsmouseover"] = true, 						-- Right Bars on mouseover
+	["rightbarsmouseover"] = false, 						-- Right Bars on mouseover
 	["shapeshiftmouseover"] = false,					-- Shapeshiftbar on mouseover
 	["macrotext"] = false,								-- display macro text on buttons
 	["petbaralwaysvisible"] = true,						-- Always show petbar even if rightbarsmouseover = true
