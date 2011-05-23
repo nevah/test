@@ -265,6 +265,9 @@ local function Shared(self, unit)
 						
 			local custombar = CreateFrame("Frame", "CustomTukuiActionBar", UIParent, "SecureHandlerStateTemplate")
 			custombar:CreatePanel("Default", 1, 39, "TOPLEFT", power.border, "BOTTOMLEFT", 0, -6)
+			local totalspells = table.getn(C.actionbar.custombar.spells)
+			if totalspells ~= 0 and C.actionbar.custombar.enable == true then
+			custombar:SetWidth(totalspells*35 + (totalspells+1)*2)
 				custombarline1 = CreateFrame("Frame", nil, custombar)
 				custombarline1:CreatePanel("Default", 2, 5, "BOTTOMRIGHT", custombar, "TOPRIGHT", -15, 0)
 				custombarline1:SetFrameStrata("BACKGROUND")
@@ -312,8 +315,9 @@ local function Shared(self, unit)
 					end
 				end)
 			end
-			local totalspells = table.getn(C.actionbar.custombar.spells)
-			custombar:SetWidth(totalspells*35 + (totalspells+1)*2)
+			else
+				custombar:Hide()
+			end
 			
 			-- combat icon
 			local Combat = health:CreateTexture(nil, "OVERLAY")

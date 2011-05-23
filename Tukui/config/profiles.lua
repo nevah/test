@@ -22,7 +22,7 @@ end
 
 if T.myname == "Epicshot" then
 	C.swingtimer.enable = true
-	C.actionbar.custombar.spells = {"Ice Trap", "Mend Pet"}
+	--C.actionbar.custombar.spells = {"Ice Trap", "Mend Pet"}
 end
 
 if T.myname == "Epicgoose" then
