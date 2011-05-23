@@ -17,6 +17,7 @@ end
 if T.myname == "Epicgrim" then
 	C.actionbar.hideshapeshift = true
 	C.unitframes.classbar = false
+	C.actionbar.custombar.spells = {"Rebirth", "Innervate", "Darkflight"}
 end
 
 if T.myname == "Epicelement" then
