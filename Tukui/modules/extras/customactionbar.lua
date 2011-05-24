@@ -47,6 +47,7 @@ if totalspells ~= 0 and C.actionbar.custombar.enable == true then
 			custombutton[i].texture:SetTexture(select(3, GetSpellInfo(C.actionbar.custombar.spells[i])))
 			local start, duration, enabled = GetSpellCooldown(C.actionbar.custombar.spells[i])
 			if enabled ~= 0 then
+			custombutton[i].texture:SetVertexColor(1,1,1)
 			custombutton[i].cooldown:SetCooldown(start, duration)
 			else
 			custombutton[i].texture:SetVertexColor(.35, .35, .35)
