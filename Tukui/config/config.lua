@@ -13,7 +13,7 @@ C["general"] = {
 }
 
 C["panels"] = {
-	["switchchats"] = false,							-- Switchs loot and meters with chat frame 1's location (REQUIRES /RESETUI)
+	["switchchats"] = false,								-- Switchs loot and meters with chat frame 1's location (REQUIRES /RESETUI)
 		["switchdatatext"] = false,						-- (Only works if ["switchchats"] = true) Switch the attached datatext with the chat.
 
 }
@@ -237,10 +237,10 @@ C["databars"] = {
 }
 
 C["chat"] = {
-	["leftchatbackground"] = true,						-- attached to ChatFrame1
-	["rightchatbackground"] = true,						-- attached to ChatFrameX
+	["leftchatbackground"] = true,						-- attached to ChatFrame1 (don't turn of :P)
+	["rightchatbackground"] = true,						-- attached to ChatFrameX (don't turn of :P)
 		["rightchatnumber"] = 4,						-- Rightchat-background is attached to ChatFrameX ..X = value
-	["fading"] = true,									-- Enable Fading
+	["fading"] = false,									-- Enable Fading
 	
 	["enable"] = true,                                  -- blah
 	["whispersound"] = true,                            -- play a sound when receiving whisper

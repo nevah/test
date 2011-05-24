@@ -84,7 +84,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 				Text:SetFormattedText(displayString, numOnline)
 				self:SetAllPoints(Text)
 			else
-				Text:SetText(E.ValColor..L.datatext_noguild)
+				Text:SetText(L.datatext_noguild)
 			end
 		end
 	end
