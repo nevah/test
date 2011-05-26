@@ -96,6 +96,7 @@ C["actionbar"] = {
 		["enable"] = true,								-- Herp
 		["spells"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 	},
+	["trinketbar"] = true,								-- Show trinkets on the center on screen
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
 	["rightbarsmouseover"] = false, 						-- Right Bars on mouseover
@@ -111,6 +112,11 @@ C["actionbar"] = {
 	["buttonsize"] = 27,                                -- normal buttons size
 	["petbuttonsize"] = 29,                             -- pet & stance buttons size (Does NOT effect HORIZONTAL pet bar)
 	["buttonspacing"] = 4,                              -- buttons spacing
+}
+
+C["spechelper"] = {
+	["primarygear"] = "primary"	,						-- Configure per toon in the profiles.lua
+	["secondarygear"] = "secondary",						-- Configure per toon in the profiles.lua
 }
 
 C["arena"] = {

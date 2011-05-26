@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
--- EXAMPLE CUSTOMBAR SETUP - C.actionbar.custombar.spells = {"Regrowth", "Rebirth"}
+-- EXAMPLE CUSTOMBAR SETUP - C.actionbar.custombar.spells = {"Regrowth", "Rebirth", 60800} names for spells / itemIDs for items
 ----------------------------------------------------------------------------
 -- Per Class Config (overwrite general)
 -- Class need to be UPPERCASE
@@ -17,7 +17,7 @@ end
 if T.myname == "Epicgrim" then
 	C.actionbar.hideshapeshift = true
 	C.unitframes.classbar = false
-	C.actionbar.custombar.spells = {"Rebirth", "Innervate", "Darkflight", "Nature's Swiftness"}
+	C.actionbar.custombar.spells = {"Rebirth", "Innervate", "Darkflight"}
 end
 
 if T.myname == "Epicelement" then

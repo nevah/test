@@ -55,6 +55,7 @@
 	<Script file="modules\blizzard\timertracker.lua"/>
 	
 	<Script file="modules\extras\customactionbar.lua"/>
+	<Script file="modules\extras\trinkets.lua"/>
 	
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
