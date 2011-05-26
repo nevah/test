@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 local custombar = CreateFrame("Frame", "CustomTukuiActionBar", UIParent, "SecureHandlerStateTemplate")
 custombar:CreatePanel("Default", 1, 39, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, -6)
 local totalspells = table.getn(C.actionbar.custombar.spells)
-if (totalspells ~= 0 or totalitems ~= 0) and C.actionbar.custombar.enable == true then
+if totalspells ~= 0 and C.actionbar.custombar.enable == true then
 	custombar:SetWidth((totalspells)*35 + ((totalspells)+1)*2)
 		custombarline1 = CreateFrame("Frame", nil, custombar)
 		custombarline1:CreatePanel("Default", 2, 5, "BOTTOMRIGHT", custombar, "TOPRIGHT", -15, 0)
@@ -25,25 +25,25 @@ if (totalspells ~= 0 or totalitems ~= 0) and C.actionbar.custombar.enable == tru
 		-- texture settup
 		custombutton[i].texture = custombutton[i]:CreateTexture(nil, "BORDER")
 		custombutton[i].texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		custombutton[i].texture:SetPoint("TOPLEFT", custombutton[i] ,"TOPLEFT", 2, -2)
-		custombutton[i].texture:SetPoint("BOTTOMRIGHT", custombutton[i] ,"BOTTOMRIGHT", -2, 2)
+		custombutton[i].texture:Point("TOPLEFT", custombutton[i] ,"TOPLEFT", 2, -2)
+		custombutton[i].texture:Point("BOTTOMRIGHT", custombutton[i] ,"BOTTOMRIGHT", -2, 2)
 		-- cooldown overlay
 		custombutton[i].cooldown = CreateFrame("Cooldown", "$parentCD", custombutton[i], "CooldownFrameTemplate")
 		custombutton[i].cooldown:SetAllPoints(custombutton[i].texture)				
 		-- text settup
 		custombutton[i].value = custombutton[i]:CreateFontString(nil, "ARTWORK")
-		custombutton[i].value:SetFont(C["media"].font, 15, "OUTLINE")
+		custombutton[i].value:SetFont(C["media"].font, 12, "OUTLINE")
+		custombutton[i].value:SetText("ERROR")
 		custombutton[i].value:SetTextColor(1, 0, 0)
-		custombutton[i].value:SetShadowColor(0, 0, 0, 0.5)
-		custombutton[i].value:SetShadowOffset(2, -2)
+		custombutton[i].value:Hide()
 		custombutton[i].value:Point("CENTER", custombutton[i], "CENTER")
 		-- hoverover stuffz
-		custombutton[i]:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(.4, .4, .4) end)
-		custombutton[i]:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
+		custombutton[i]:StyleButton()
 		-- cooldown stuffz
 		custombutton[i]:SetScript("OnUpdate", function()
 			local name = GetItemInfo(v)
 			if IsEquippedItem(name) == 1 then
+				custombutton[i].value:Hide()
 				local trinket1id = GetInventoryItemID("player", 13)
 				local trinket2id = GetInventoryItemID("player", 14)
 				local var = 0
@@ -59,6 +59,7 @@ if (totalspells ~= 0 or totalitems ~= 0) and C.actionbar.custombar.enable == tru
 				custombutton[i].texture:SetVertexColor(.35, .35, .35)
 				end
 			elseif GetSpellInfo(v) == v then
+				custombutton[i].value:Hide()
 				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
 				local start, duration, enabled = GetSpellCooldown(v)
 				custombutton[i]:SetAttribute("type", "spell");
@@ -70,7 +71,7 @@ if (totalspells ~= 0 or totalitems ~= 0) and C.actionbar.custombar.enable == tru
 				custombutton[i].texture:SetVertexColor(.35, .35, .35)
 				end
 			else
-				custombutton[i].value:SetText("ERROR")
+				custombutton[i].value:Show()
 			end
 		end)
 	end
