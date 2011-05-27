@@ -15,7 +15,7 @@ local function CreateUtilities(self, event, addon)
 		-- Anchor
 		local anchor = CreateFrame("Frame", "TukuiRaidUtilityAnchor", UIParent)
 		anchor:SetMovable(true)
-		anchor:CreatePanel("", TukuiMinimap:GetWidth(), 21, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2)
+		anchor:CreatePanel("", TukuiMinimap:GetWidth(), 21, "TOP", UIParent, "TOP", 0, 0)
 		anchor:SetScript("OnMouseDown", function() anchor:StartMoving() end)
 		anchor:SetScript("OnMouseUp", function() anchor:StopMovingOrSizing() end)
 		anchor:SetBackdropBorderColor(1,0,0)
