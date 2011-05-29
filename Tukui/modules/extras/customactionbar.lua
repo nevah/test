@@ -3,19 +3,32 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -- custom action bar (add spells in the profiles.lua)		
 local custombar = CreateFrame("Frame", "CustomTukuiActionBar", UIParent, "SecureHandlerStateTemplate")
 custombar:CreatePanel("Default", 1, 39, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, -6)
-local totalspells = table.getn(C.actionbar.custombar.spells)
+local totalprimary = table.getn(C.actionbar.custombar.primary)
+local totalsecondary = table.getn(C.actionbar.custombar.secondary)
 if totalspells ~= 0 and C.actionbar.custombar.enable == true then
-	custombar:SetWidth((totalspells)*35 + ((totalspells)+1)*2)
-		custombarline1 = CreateFrame("Frame", nil, custombar)
-		custombarline1:CreatePanel("Default", 2, 5, "BOTTOMRIGHT", custombar, "TOPRIGHT", -15, 0)
-		custombarline1:SetFrameStrata("BACKGROUND")
-		
-		custombarline2 = CreateFrame("Frame", nil, custombar)
-		custombarline2:CreatePanel("Default", 2, 5, "BOTTOMLEFT", custombar, "TOPLEFT", 15, 0)
-		custombarline2:SetFrameStrata("BACKGROUND")
+	custombarline1 = CreateFrame("Frame", nil, custombar)
+	custombarline1:CreatePanel("Default", 2, 5, "BOTTOMRIGHT", custombar, "TOPRIGHT", -15, 0)
+	custombarline1:SetFrameStrata("BACKGROUND")
+	custombarline2 = CreateFrame("Frame", nil, custombar)
+	custombarline2:CreatePanel("Default", 2, 5, "BOTTOMLEFT", custombar, "TOPLEFT", 15, 0)
+	custombarline2:SetFrameStrata("BACKGROUND")
+	
+else
+	custombar:Hide()
+end
+
+local function MakeButtons()
 	local custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
+	local spelllist = {}
+	if GetActiveTalentGroup() == 1 then
+		custombar:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
+		spelllist = C.actionbar.custombar.primary
+	else
+		custombar:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
+		spelllist = C.actionbar.custombar.secondary
+	end
 	-- spell stuffz
-	for i, v in ipairs(C.actionbar.custombar.spells) do
+	for i, v in ipairs(spelllist) do	
 		--button stuffz
 		custombutton[i] = CreateFrame("Button", "CustomButton"..i, custombar, "SecureActionButtonTemplate")
 		custombutton[i]:CreatePanel("Default", 35, 35, "TOPLEFT", custombar, "TOPLEFT", 2, -2)
@@ -75,6 +88,33 @@ if totalspells ~= 0 and C.actionbar.custombar.enable == true then
 			end
 		end)
 	end
-else
-	custombar:Hide()
 end
+
+local function KillButtons()
+	local killlist = {}
+	if totalprimary > totalsecondary then
+		killlist = C.actionbar.custombar.primary
+	else
+		killlist = C.actionbar.custombar.secondary
+	end
+	for i, v in ipairs(killlist) do
+		CustomButton[i]:Kill()
+	end
+	MakeButtons()
+end
+
+local function OnEvent(self, event)
+	if event == "PLAYER_ENTERING_WORLD" then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		MakeButtons()
+	else
+		self:SetScript("OnEvent", KillButtons)
+	end
+end
+
+local f = CreateFrame("Frame", nil, UIParent)
+f:RegisterEvent("PLAYER_TALENT_UPDATE")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("CHARACTER_POINTS_CHANGED")
+f:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+f:SetScript("OnEvent", OnEvent) 

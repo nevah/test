@@ -97,7 +97,8 @@ C["castbar"] = {
 C["actionbar"] = {
 	["custombar"] = {								
 		["enable"] = true,								-- Herp
-		["spells"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
+		["primary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
+		["secondary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 	},
 	["trinketbar"] = false,								-- Show trinkets on the center on screen
 		["trinketbarX"] = 0,							-- X value for anchor
