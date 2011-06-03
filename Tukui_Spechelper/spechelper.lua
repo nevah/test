@@ -115,6 +115,10 @@ spec:CreatePanel("Default", 1, 20, "TOPRIGHT", UIParent, "TOPRIGHT", -32, -212)
 		if i == 2 then SetActiveTalentGroup(1) end
 	end
 	end)
+	
+	if C.general.colorscheme == true then
+		spec:SetBackdropColor(unpack(C.general.color))
+	end
 
 ----------------
 --Toggle Button
@@ -143,6 +147,10 @@ toggle:CreatePanel("Default", 20, 20, "TOPLEFT", Spec, "TOPRIGHT", 3, 0)
 			end
 		end)
 		
+	if C.general.colorscheme == true then
+		toggle:SetBackdropColor(unpack(C.general.color))
+	end
+		
 --------------
 -- DPS layout
 --------------
@@ -158,6 +166,10 @@ dps:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hover
 dps:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
 dps:SetAttribute("type", "macro")
 dps:SetAttribute("macrotext", "/dps")
+
+	if C.general.colorscheme == true then
+		dps:SetBackdropColor(unpack(C.general.color))
+	end
 ---------------	
 -- Heal layout
 ---------------
@@ -173,6 +185,10 @@ heal:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hove
 heal:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
 heal:SetAttribute("type", "macro")
 heal:SetAttribute("macrotext", "/heal")
+
+	if C.general.colorscheme == true then
+		heal:SetBackdropColor(unpack(C.general.color))
+	end
 ------------
 --Key Binds
 ------------
@@ -188,7 +204,10 @@ binds:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hov
 binds:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
 binds:SetAttribute("type", "macro")
 binds:SetAttribute("macrotext", "/bindkey")
-		
+
+	if C.general.colorscheme == true then
+		binds:SetBackdropColor(unpack(C.general.color))
+	end		
 ------------
 --Move UI
 ------------
@@ -205,6 +224,9 @@ mui:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.med
 mui:SetAttribute("type", "macro")
 mui:SetAttribute("macrotext", "/moveui")
 
+	if C.general.colorscheme == true then
+		mui:SetBackdropColor(unpack(C.general.color))
+	end
 ------------------		
 -- Gear switching
 ------------------

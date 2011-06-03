@@ -15,7 +15,7 @@ local function chatsetup()
 		FCF_OpenNewWindow(LOOT.."/"..L.chat_trade)
 		FCF_UnDockFrame(ChatFrame4)
 		FCF_SetLocked(ChatFrame4, 1)
-		ChatFrame4:Show()
+		--ChatFrame4:Show()
 
 		for i = 1, NUM_CHAT_WINDOWS do
 			local frame = _G[format("ChatFrame%s", i)]

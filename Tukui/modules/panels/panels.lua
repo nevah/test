@@ -173,6 +173,10 @@ else
 	iright:Point("BOTTOMLEFT", ChatBG1, "TOPLEFT", 0, 6)
 	iright:Point("BOTTOMRIGHT", ChatBG1, "TOPRIGHT", 0, 6)
 end
+if C.chat.rightchatbackground ~= true then
+	iright:ClearAllPoints()
+	iright:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -6, 6)
+end
 iright:SetFrameLevel(2)
 
 irightline1 = CreateFrame("Frame", nil, iright)
@@ -242,6 +246,50 @@ TukuiBar2:CreateShadow("Default")
 TukuiBar3:CreateShadow("Default")
 petbg:CreateShadow("Default")
 BNToastFrame:CreateShadow("Default")
+
+----------------------------------------------------------------------------------------
+--	ShieldMonitor skin
+----------------------------------------------------------------------------------------
+local SMSkin = CreateFrame("Frame")
+SMSkin:RegisterEvent("PLAYER_LOGIN")
+SMSkin:SetScript("OnEvent", function(self, event, addon)
+	if not IsAddOnLoaded("shieldmonitor") then return end
+	
+	Shieldmonitor_Options.scale = 1
+	
+	shieldmonitor_Frame:SetTemplate("Default")
+	shieldmonitor_Frame:HookScript("OnShow", function(self)
+		self:SetBackdropBorderColor(unpack(C.general.bordercolor))
+	end)
+	shieldmonitor_Frame:HookScript("OnUpdate", function(self)
+		self:SetBackdropBorderColor(unpack(C.general.bordercolor))
+	end)
+	shieldmonitor_Frame:SetSize(200, 25)
+	
+	shieldmonitor_Bar:SetStatusBarTexture(C.media.normTex)
+	shieldmonitor_Bar:ClearAllPoints()
+	shieldmonitor_Bar:SetPoint("TOPLEFT", shieldmonitor_Frame, "TOPLEFT", 2, -2)
+	shieldmonitor_Bar:SetPoint("BOTTOMRIGHT", shieldmonitor_Frame, "BOTTOMRIGHT", -2, 2)
+	
+	local IconBorder = CreateFrame("Frame", "ShieldIconBorder", shieldmonitor_Frame)
+	IconBorder:SetTemplate("Default")
+	IconBorder:SetFrameStrata("BACKGROUND")
+	IconBorder:SetSize(25, 25)
+	IconBorder:SetPoint("RIGHT", shieldmonitor_Frame, "LEFT", -3, 0)
+	
+	shieldmonitor_FrameIcon1:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	shieldmonitor_FrameIcon1:ClearAllPoints()
+	shieldmonitor_FrameIcon1:SetPoint("TOPLEFT", IconBorder, "TOPLEFT", 2, -2)
+	shieldmonitor_FrameIcon1:SetPoint("BOTTOMRIGHT", IconBorder, "BOTTOMRIGHT", -2, 2)
+	
+	shieldmonitor_BarText:SetFont(C.media.font, 12, "THINOUTLINE")
+	shieldmonitor_BarText:SetPoint("CENTER", shieldmonitor_Bar, "CENTER", 0, 0)
+
+	shieldmonitor_FrameDuration:SetFont(C.media.font, 12, "THINOUTLINE")
+	shieldmonitor_FrameDuration:SetParent(shieldmonitor_Bar)
+	shieldmonitor_FrameDuration:ClearAllPoints()
+	shieldmonitor_FrameDuration:SetPoint("RIGHT", shieldmonitor_Frame, "RIGHT", -2, 0)
+end)
 
 -- BELOW IS BOOMKIN SHIT!
 

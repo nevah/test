@@ -22,8 +22,15 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[8] = {88342,88345}, -- Tol Barad
 };
  
-local f = CreateFrame("Frame","TukuiTeleportMenu",UIParent)
-f:CreatePanel("Default",TukuiMinimap:GetWidth(),(#spells+1)*21+3, "TOPLEFT", TukuiMinimapStatsLeft, "BOTTOMLEFT", 0, -3)
+local b = CreateFrame("Button", nil, UIParent)
+b:CreatePanel("Default",150,21, "TOP", UIParent, "TOP", 0, -3) 
+local text = b:CreateFontString("OVERLAY")
+text:SetFont(C.datatext.font, C.datatext.fontsize, "THINOUTLINE")
+text:SetPoint("CENTER",b,"CENTER")
+text:SetText("MAGE PORTS")
+ 
+local f = CreateFrame("Frame","TukuiTeleportMenu",b)
+f:CreatePanel("Default",TukuiMinimap:GetWidth(),(#spells+1)*21+3, "TOP", b, "BOTTOM", 0, -3)
 f:SetFrameStrata("HIGH")
 f:CreateShadow("Default")
  
@@ -65,8 +72,6 @@ for i,spell in pairs(spells) do
 end
 f:Hide()
  
-local b = CreateFrame("Button", nil, TukuiMinimapStatsLeft)
-b:SetAllPoints(TukuiMinimapStatsLeft)
 b:SetScript("OnClick", function(self)
 	if TukuiTeleportMenu:IsShown() then
 		TukuiTeleportMenu:Hide()

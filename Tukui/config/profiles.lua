@@ -23,11 +23,13 @@ if T.myname == "Epicgrim" then
 end
 
 if T.myname == "Epicelement" then
-	C.actionbar.custombar.spells = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
+	C.actionbar.custombar.primary = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
+	C.actionbar.custombar.secondary = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
 end
 
-if T.myname == "Arcanegrim" then
-	C.actionbar.custombar.spells = {"Mirror Image", "Icy Veins", "Evocation", "Ice Block", "Summon Water Elemental" }
+if T.myname == "Epicpower" then
+	C.actionbar.custombar.primary = {"Mirror Image", "Icy Veins", "Ice Block", "Evocation", "Summon Water Elemental" }
+	C.actionbar.custombar.secondary = {"Mirror Image", "Icy Veins", "Ice Block" ,"Evocation", "Summon Water Elemental" }
 end
 
 

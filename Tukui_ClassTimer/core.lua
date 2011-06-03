@@ -309,9 +309,6 @@ local CLASS_FILTERS = {
 				CreateSpellEntry( 36032 ), -- Arcane Blast
 				CreateSpellEntry( 12042 ), -- Arcane Power
 				CreateSpellEntry( 32612 ), -- Invisibility
-				CreateSpellEntry( 1463 ), -- Mana Shield
-				CreateSpellEntry( 543 ), -- Mage Ward
-				CreateSpellEntry( 11426 ), -- Ice Barrier
 				CreateSpellEntry( 45438 ), -- Ice Block
 				CreateSpellEntry( 12472 ), -- Icy Veins
 				CreateSpellEntry( 130 ), -- Slow Fall

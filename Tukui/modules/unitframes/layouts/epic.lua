@@ -1076,21 +1076,21 @@ local function Shared(self, unit)
 			castbar.border:SetPoint("BOTTOMRIGHT", castbar, "BOTTOMRIGHT", 2, -2)
 		end
 		
-		if C["unitframes"].totdebuffs == true then
-			local debuffs = CreateFrame("Frame", nil, health)
-			debuffs:Height(20)
-			debuffs:Width(300)
-			debuffs.size = 19.5
-			debuffs.spacing = 3
-			debuffs.num = 7
+		-- if C["unitframes"].totdebuffs == true then
+			-- local debuffs = CreateFrame("Frame", nil, health)
+			-- debuffs:Height(20)
+			-- debuffs:Width(300)
+			-- debuffs.size = 19.5
+			-- debuffs.spacing = 3
+			-- debuffs.num = 7
 
-			debuffs:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -3)
-			debuffs.initialAnchor = "TOPLEFT"
-			debuffs["growth-y"] = "UP"
-			debuffs.PostCreateIcon = C["unitframes"].PostCreateAura
-			debuffs.PostUpdateIcon = C["unitframes"].PostUpdateAura
-			self.Debuffs = debuffs
-		end
+			-- debuffs:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -3)
+			-- debuffs.initialAnchor = "TOPLEFT"
+			-- debuffs["growth-y"] = "UP"
+			-- debuffs.PostCreateIcon = C["unitframes"].PostCreateAura
+			-- debuffs.PostUpdateIcon = C["unitframes"].PostUpdateAura
+			-- self.Debuffs = debuffs
+		-- end
 		
 		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".
 		self:RegisterEvent("UNIT_PET", T.updateAllElements)
@@ -1864,18 +1864,13 @@ end
 --------------------------
 --custom AB move function
 --------------------------
-if TukuiPet:IsShown() then
-	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
-else
-	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -16)
-end
-TukuiPet:HookScript("OnShow", function()
-	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
+CustomTukuiActionBar:SetScript("OnUpdate", function()
+	if TukuiPet:IsShown() then
+		CustomTukuiActionBar:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
+	else
+		CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -16)
+	end
 end)
-TukuiPet:HookScript("OnHide", function()
-	CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -16)
-end)
-
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 

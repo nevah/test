@@ -6,6 +6,10 @@ C["general"] = {
 	["overridehightolow"] = false,						-- even that is experimental only! :> .. use lowres version on high resolution.
 	["classcoloredborder"] = false, 					-- 
 	
+	-- ["ali"] = true,
+	-- ["colorscheme"] = false,
+	-- ["color"] = {1, (102/225), (153/225)},
+	
 	["bordercolor"] = { .15, .15, .15 },				-- border color of tukui panels
 	["backdropcolor"] = { .05,.05,.05 },				-- background color of tukui panels
 
@@ -120,11 +124,6 @@ C["actionbar"] = {
 	["buttonspacing"] = 4,                              -- buttons spacing
 }
 
-C["spechelper"] = {
-	["primarygear"] = "primary"	,						-- Configure per toon in the profiles.lua
-	["secondarygear"] = "secondary",						-- Configure per toon in the profiles.lua
-}
-
 C["arena"] = {
 	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
 }
@@ -184,7 +183,7 @@ C["map"] = {
 C["loot"] = {
 	["lootframe"] = true,                               -- reskin the loot frame to fit tukui
 	["rolllootframe"] = true,                           -- reskin the roll frame to fit tukui
-	["autogreed"] = true,                               -- auto-dez or auto-greed item at max level, auto-greed Frozen orb
+	["autogreed"] = false,                               -- auto-dez or auto-greed item at max level, auto-greed Frozen orb
 }
 
 C["cooldown"] = {
@@ -249,8 +248,8 @@ C["databars"] = {
 }
 
 C["chat"] = {
-	["leftchatbackground"] = true,						-- attached to ChatFrame1 (don't turn of :P)
-	["rightchatbackground"] = true,						-- attached to ChatFrameX (don't turn of :P)
+	["leftchatbackground"] = true,						-- attached to ChatFrame1 (don't turn off :P)
+	["rightchatbackground"] = true,						-- attached to ChatFrameX (don't turn off :P)
 		["rightchatnumber"] = 4,						-- Rightchat-background is attached to ChatFrameX ..X = value
 	["fading"] = false,									-- Enable Fading
 	

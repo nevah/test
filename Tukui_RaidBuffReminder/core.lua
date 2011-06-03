@@ -320,6 +320,9 @@ raidbuff_reminder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
+if C.general.colorscheme == true then
+	raidbuff_reminder:SetBackdropColor(unpack(C.general.color))
+end
 
 --Function to create buttons
 local function CreateButton(name, relativeTo, firstbutton)
@@ -340,6 +343,11 @@ local function CreateButton(name, relativeTo, firstbutton)
 	button.t = button:CreateTexture(name..".t", "OVERLAY")
 	button.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button.t:SetAllPoints(button)
+	
+	if C.general.colorscheme == true then
+		button:SetBackdropColor(unpack(C.general.color))
+	end
+	
 end
 
 --Create Buttons
