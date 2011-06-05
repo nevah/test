@@ -1145,112 +1145,25 @@ if C["unitframes"].charportrait == true then xOffset = -62 end
 local playerFrame = CreateAuraBarFrame( playerDataSource, TukuiPlayer );
 playerFrame:SetHiddenHeight( -yOffset );
 
-if C.unitframes.layout == 1 then
-	if C.unitframes.largefocus then
-		playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, 6 )
+if EclipseBar then
+	if EclipseBar:IsShown() then
+	playerFrame:Point("BOTTOMLEFT", EclipseBar, "TOPLEFT", 0, 45)
+	playerFrame:Point("BOTTOMRIGHT", EclipseBar, "TOPRIGHT", 0, 45)
 	else
-		if TukuiFocus:IsShown() then
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, yOffset + TukuiFocus:GetHeight() +6)
-		else
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, 6 )
-		end
-		TukuiFocus:HookScript("OnShow", function()
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, yOffset + TukuiFocus:GetHeight() +6)
-		end)
-		TukuiFocus:HookScript("OnHide", function()
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, 6 )
-		end)	
+	playerFrame:Point("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 2, 6)
+	playerFrame:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", -2, 6)
 	end
-	playerFrame:Point( "BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 0, yOffset )
+EclipseBar:HookScript("OnShow", function()
+	playerFrame:Point("BOTTOMLEFT", EclipseBar, "TOPLEFT", 0, 45)
+	playerFrame:Point("BOTTOMRIGHT", EclipseBar, "TOPRIGHT", 0, 45)
+end)
+EclipseBar:HookScript("OnHide", function()
+	playerFrame:Point("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 2, 6)
+	playerFrame:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", -2, 6)
+end)
 else
-	if EclipseBar then
-		if EclipseBar:IsShown() then
-		playerFrame:Point("BOTTOMLEFT", EclipseBar, "TOPLEFT", 0, 45)
-		playerFrame:Point("BOTTOMRIGHT", EclipseBar, "TOPRIGHT", 0, 45)
-		else
-		playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
-		playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
-		end
-	EclipseBar:HookScript("OnShow", function()
-		playerFrame:Point("BOTTOMLEFT", EclipseBar, "TOPLEFT", 0, 45)
-		playerFrame:Point("BOTTOMRIGHT", EclipseBar, "TOPRIGHT", 0, 45)
-	end)
-	EclipseBar:HookScript("OnHide", function()
-	if TukuiFocus:IsShown() then
-		if C.unitframes.focusbuffs == true then
-			if TukuiFocusTarget:IsShown() then
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 32)
-			else
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 32)
-			end
-		else
-			if TukuiFocusTarget:IsShown() then
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 5)
-			else
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 5)
-			end
-		end
-	else
-		playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
-		playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
-	end
-	end)
-	else
-	playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
-	playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
-	end
-	TukuiFocus:HookScript("OnShow", function()
-	if EclipseBar and EclipseBar:IsShown() then return end
-		if C.unitframes.focusbuffs == true then
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 32)
-			if TukuiFocusTarget:IsShown() then
-				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
-				playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 32)
-			end
-		else
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 5)
-			if TukuiFocusTarget:IsShown() then
-				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
-				playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 5)
-			end
-		end
-	end)
-	TukuiFocus:HookScript("OnHide", function()
-	if EclipseBar and EclipseBar:IsShown() then return end
-		playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
-		playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
-	end)
-	TukuiFocusTarget:HookScript("OnHide", function()
-	if EclipseBar and EclipseBar:IsShown() then return end
-		if TukuiFocus:IsShown() then
-			if C.unitframes.focusbuffs == true then
-				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
-				playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 32)
-			else
-				playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
-				playerFrame:Point( "BOTTOMRIGHT", TukuiFocus, "TOPRIGHT", -2, 5)
-			end
-		else
-			playerFrame:Point("BOTTOMLEFT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPLEFT", 2, 5)
-			playerFrame:Point("BOTTOMRIGHT", ShardBarBorder or RuneBarBorder or TotemBarBorder or TukuiPlayer, "TOPRIGHT", -2, 5)
-		end
-	end)
-	TukuiFocusTarget:HookScript("OnShow", function()
-	if EclipseBar and EclipseBar:IsShown() then return end
-		if C.unitframes.focusbuffs == true then
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 32)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 32)
-		else
-			playerFrame:Point( "BOTTOMLEFT", TukuiFocus, "TOPLEFT", 2, 5)
-			playerFrame:Point( "BOTTOMRIGHT", TukuiFocusTarget, "TOPRIGHT", -2, 5)
-		end
-	end)
+	playerFrame:Point("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 2, 6)
+	playerFrame:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", -2, 6)
 end
 
 local trinketFrame = CreateAuraBarFrame( trinketDataSource, TukuiPlayer )

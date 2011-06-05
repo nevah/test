@@ -185,6 +185,25 @@ exitvehicle2.text:Point("CENTER", 1, 1)
 exitvehicle2.text:SetText(cm.."v|r")
 RegisterStateDriver(exitvehicle2, "visibility", "[target=vehicle,exists] show;hide")
 
+-- Toggle
+local TBtoggle = CreateFrame("Button", "TrinketBarToggle", UIParent)
+TBtoggle:SetTemplate("Default")
+TBtoggle:CreateShadow("Default")
+TBtoggle:RegisterForClicks("AnyUp")
+TBtoggle:SetScript("OnClick", function(self, btn)
+	if CustomTukuiTrinketBar:IsShown() then
+		CustomTukuiTrinketBar:Hide()
+	else
+		CustomTukuiTrinketBar:Show()
+	end
+end)
+TBtoggle:Size(18,18)
+TBtoggle:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 3, 0)
+TBtoggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C.datatext.color)) end)
+TBtoggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
+TBtoggle.text = T.SetFontString(TBtoggle, C.datatext.font, C.datatext.fontsize)
+TBtoggle.text:Point("CENTER", 0, 0)
+TBtoggle.text:SetText("|cff319f1bT|r")
 --------------------------------------------------------------
 -- DrPepper taste is really good with Vodka. 
 --------------------------------------------------------------

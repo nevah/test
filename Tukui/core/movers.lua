@@ -113,16 +113,7 @@ local function moving()
 	-- don't allow moving while in combat
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 	
-	if C.sCombo.enable and C.unitframes.enable then SlashCmdList.MOVESCOMBO() end
-	if C.swingtimer.enable and C.unitframes.enable then 
-		if TukuiSwingtimerHolder:IsShown() then
-			TukuiSwingtimerHolder:Hide()
-			TukuiSwingtimerHolder:EnableMouse(false)
-		else
-			TukuiSwingtimerHolder:Show()
-			TukuiSwingtimerHolder:EnableMouse(true)
-		end
-	end
+	-- if C.sCombo.enable and C.unitframes.enable then SlashCmdList.MOVESCOMBO() end
 	if TukuiRaidUtilityAnchor then
 		if TukuiRaidUtilityAnchor:IsShown() then TukuiRaidUtilityAnchor:Hide() else TukuiRaidUtilityAnchor:Show() end
 	end

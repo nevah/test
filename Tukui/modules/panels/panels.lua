@@ -264,35 +264,28 @@ SMSkin:SetScript("OnEvent", function(self, event, addon)
 	shieldmonitor_Frame:HookScript("OnUpdate", function(self)
 		self:SetBackdropBorderColor(unpack(C.general.bordercolor))
 	end)
-	shieldmonitor_Frame:SetSize(200, 25)
+	shieldmonitor_Frame:SetSize(TukuiPlayer:GetWidth()+4, 12)
+	shieldmonitor_Frame:ClearAllPoints()
+	shieldmonitor_Frame:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 2, -11)
+	shieldmonitor_Frame:SetFrameStrata("HIGH")
 	
 	shieldmonitor_Bar:SetStatusBarTexture(C.media.normTex)
 	shieldmonitor_Bar:ClearAllPoints()
 	shieldmonitor_Bar:SetPoint("TOPLEFT", shieldmonitor_Frame, "TOPLEFT", 2, -2)
 	shieldmonitor_Bar:SetPoint("BOTTOMRIGHT", shieldmonitor_Frame, "BOTTOMRIGHT", -2, 2)
-	
-	local IconBorder = CreateFrame("Frame", "ShieldIconBorder", shieldmonitor_Frame)
-	IconBorder:SetTemplate("Default")
-	IconBorder:SetFrameStrata("BACKGROUND")
-	IconBorder:SetSize(25, 25)
-	IconBorder:SetPoint("RIGHT", shieldmonitor_Frame, "LEFT", -3, 0)
-	
-	shieldmonitor_FrameIcon1:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	shieldmonitor_FrameIcon1:ClearAllPoints()
-	shieldmonitor_FrameIcon1:SetPoint("TOPLEFT", IconBorder, "TOPLEFT", 2, -2)
-	shieldmonitor_FrameIcon1:SetPoint("BOTTOMRIGHT", IconBorder, "BOTTOMRIGHT", -2, 2)
-	
-	shieldmonitor_BarText:SetFont(C.media.font, 12, "THINOUTLINE")
+
+	shieldmonitor_FrameIcon1:Hide()
+
+	shieldmonitor_BarText:SetFont(C.media.uffont, 8, "THINOUTLINE")
 	shieldmonitor_BarText:SetPoint("CENTER", shieldmonitor_Bar, "CENTER", 0, 0)
 
-	shieldmonitor_FrameDuration:SetFont(C.media.font, 12, "THINOUTLINE")
+	shieldmonitor_FrameDuration:SetFont(C.media.uffont, 8, "THINOUTLINE")
 	shieldmonitor_FrameDuration:SetParent(shieldmonitor_Bar)
 	shieldmonitor_FrameDuration:ClearAllPoints()
 	shieldmonitor_FrameDuration:SetPoint("RIGHT", shieldmonitor_Frame, "RIGHT", -2, 0)
 end)
 
 -- BELOW IS BOOMKIN SHIT!
-
 ------------------------------------------------------------------------
 	-- Balance Power Panel              [MY EDIT]
 ------------------------------------------------------------------------

@@ -26,8 +26,6 @@ C["panels"] = {
 }
 
 C["unitframes"] = {
-	["layout"] = 3,										-- Layout 3 is what to use. 1 and 2 are from duffed and are untested in this UI.
-
 	["fontsize"] = 8,									-- Fontsize on Unitframes
 	["healthbarcolor"] = {.2, .2, .2, 1},				-- Healthbar color (if unicolor = true) 
 	["deficitcolor"] = {(178/225), (34/225), (34/225)},	-- Healthbar deficit color (if unicolor = true) (FIREBRICK > all)
@@ -37,27 +35,29 @@ C["unitframes"] = {
 	["vengeancebar"] = true,							-- Display a Vengeance-Bar instead of Threat-Bar at the right info panel
 	["fader"] = false,									-- EXPERIMENTAL (cause i didnt really test it :) - Fade Unitframes out when ooc etc.
 		["fader_alpha"] = 1,							-- alpha for frames if you're not in combat but hp is < 100% and some more conditions
-	["largefocus"] = true,								-- Use larger Focus Frame (RECOMENDED still not done with small ones :P)
 	["gridpets"] = false,								-- show pets in grid layout (only in group, not raid)
 	["gridvertical"] = false,							-- Grid direction vertical instead of horizontal
 	["gridsolo"] = false,								-- Show Grid even without a group (solo)
-	["focusdebuffs"] = true,							-- display focus debuffs
-	["focusbuffs"] = false,								-- buff Above focus
 	["buffrows"] = 1,									-- Buff rows above Target (and Player if u enable it)
 	["debuffrows"] = 2, 								-- Debuff rows above Target (and Player if u enable it)
-	["portraitstyle"] = "ICON",							-- "ICON" or "MODEL" (Layout 2 only)
 	["ColorGradient"] = false,							-- Add Color-Gradient to healthbar from healthbarcolor to red
 	["powerClasscolored"] = true,						-- Color in Class-color instead of power-color :>
+	
+	--focus options
+	["focusdebuffs"] = true,							-- display focus debuffs
+	["focusbuffs"] = false,								-- buff Above focus
+	["largefocus"] = true,								-- Use larger Focus Frame
+	["focusportrait"] = true,							-- you know what this means right... RIGHT!
 	
 	-- general options
 	["enable"] = true,                                  -- do i really need to explain this?
 	["enemyhcolor"] = false,                            -- enemy target (players) color by hostility, very useful for healer.´
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
-	["auratextscale"] = 8,                             -- the font size of buffs/debuffs timers on unitframes
+	["auratextscale"] = 8,                              -- the font size of buffs/debuffs timers on unitframes
 	["playerauras"] = false,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
-	["totdebuffs"] = true,                             -- enable tot debuffs (high reso only)
+	["totdebuffs"] = true,                              -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = true,                           	-- do i really need to explain this?
@@ -104,12 +104,11 @@ C["actionbar"] = {
 		["primary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 		["secondary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 	},
-	["trinketbar"] = false,								-- Show trinkets on the center on screen
-		["trinketbarX"] = 0,							-- X value for anchor
-		["trinketbarY"] = -150,							-- Y value for anchor
+	["trinketbarX"] = 0,								-- X value for anchor
+	["trinketbarY"] = -150,								-- Y value for anchor
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
-	["rightbarsmouseover"] = false, 						-- Right Bars on mouseover
+	["rightbarsmouseover"] = true, 					-- Right Bars on mouseover
 	["shapeshiftmouseover"] = false,					-- Shapeshiftbar on mouseover
 	["macrotext"] = false,								-- display macro text on buttons
 	["petbaralwaysvisible"] = true,						-- Always show petbar even if rightbarsmouseover = true
@@ -155,8 +154,6 @@ C["sCombo"] = {
 
 C["swingtimer"] = {
 	["enable"] = false,									-- enable ouf_Swing Swingtimer Plugin (movable bar)
-	["width"] = 210,									-- bar width
-	["height"] = 6,										-- bar height
 	["color"] = {1, 0, 0, 0.8},							-- bar color
 }
 

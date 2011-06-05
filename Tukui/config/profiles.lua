@@ -27,6 +27,12 @@ if T.myname == "Epicelement" then
 	C.actionbar.custombar.secondary = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
 end
 
+if T.myname == "Epicshot" then
+	C.swingtimer.enable = true
+	C.actionbar.custombar.primary = {"Mend Pet"}
+	C.actionbar.custombar.secondary = {"Mend Pet"}
+end
+
 if T.myname == "Epicpower" then
 	C.actionbar.custombar.primary = {"Mirror Image", "Icy Veins", "Ice Block", "Evocation", "Summon Water Elemental" }
 	C.actionbar.custombar.secondary = {"Mirror Image", "Icy Veins", "Ice Block" ,"Evocation", "Summon Water Elemental" }

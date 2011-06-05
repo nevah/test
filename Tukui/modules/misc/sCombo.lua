@@ -7,7 +7,7 @@ if not C.sCombo.enable or not C.unitframes.enable then return end
 
 TukuiTarget:DisableElement('CPoints') 
 local Options = {
-	comboWidth = T.Scale(40),
+	comboWidth = T.Scale(41),
 	comboHeight = T.Scale(11),
 	spacing = T.Scale(3), 
 	colors = {
@@ -19,22 +19,12 @@ local Options = {
 	},
 }
 
-local Anchor = CreateFrame("Frame", "sComboAnchor", UIParent)
-Anchor:CreatePanel("", ((Options.comboWidth + Options.spacing)*5)-Options.spacing, 12, "CENTER", UIParent, "CENTER", 0, -175)
-Anchor:SetBackdropBorderColor(1,0,0)
-Anchor:CreateShadow("")
-Anchor:SetMovable(true)
-Anchor:Hide()
-Anchor.text = Anchor:CreateFontString(nil, "OVERLAY")
-Anchor.text:SetFont(C.datatext.font, C.datatext.fontsize)
-Anchor.text:SetPoint("CENTER")
-Anchor.text:SetText("Move CP-Bar (sCombo)")
-
 local sCombo = CreateFrame("Frame", "sCombo", UIParent)
 for i = 1, 5 do
 	sCombo[i] = CreateFrame("Frame", "sCombo"..i, UIParent)
 	sCombo[i]:CreatePanel("Default", Options.comboWidth, Options.comboHeight, "CENTER", UIParent, "CENTER", 0, 0)
 	sCombo[i]:CreateShadow("Default")
+	sCombo[i]:SetFrameStrata("HIGH")
 	if C.datatext.fontsize == 8 then
 		sCombo[i].text = sCombo[i]:CreateFontString(nil, "OVERLAY")
 		sCombo[i].text:SetFont(C.datatext.font, C.datatext.fontsize)
@@ -43,7 +33,7 @@ for i = 1, 5 do
 	end
 		
 	if i == 1 then
-		sCombo[i]:Point("TOPLEFT", Anchor, "BOTTOMLEFT", 0, -3)
+		sCombo[i]:Point("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", -1, -10)
 	else
 		sCombo[i]:Point("LEFT", sCombo[i-1], "RIGHT", Options.spacing, 0)
 	end
@@ -70,32 +60,32 @@ for i = 1, 5 do
 end
 
 -- slash command
-local move = false
-SLASH_MOVESCOMBO1 = "/scp"
-SlashCmdList.MOVESCOMBO = function()
-if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
-	if not move then
-		move = true
-		Anchor:EnableMouse(true)
-		Anchor:Show()
-		Anchor:SetScript("OnMouseDown", function(self) self:StartMoving() end)
-		Anchor:SetScript("OnMouseUp", function(self) self:StopMovingOrSizing() end)
-		for i = 1,5 do 
-			sCombo[i]:Show() 
-			sCombo[i]:UnregisterAllEvents()
-		end
-	else
-		move = false
-		Anchor:EnableMouse(false)
-		Anchor:Hide()
-		for i = 1,5 do 
-			sCombo[i]:Hide() 
-			sCombo[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
-			sCombo[i]:RegisterEvent("UNIT_COMBO_POINTS")
-			sCombo[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
-		end
-	end
-end
+-- local move = false
+-- SLASH_MOVESCOMBO1 = "/scp"
+-- SlashCmdList.MOVESCOMBO = function()
+-- if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
+	-- if not move then
+		-- move = true
+		-- Anchor:EnableMouse(true)
+		-- Anchor:Show()
+		-- Anchor:SetScript("OnMouseDown", function(self) self:StartMoving() end)
+		-- Anchor:SetScript("OnMouseUp", function(self) self:StopMovingOrSizing() end)
+		-- for i = 1,5 do 
+			-- sCombo[i]:Show() 
+			-- sCombo[i]:UnregisterAllEvents()
+		-- end
+	-- else
+		-- move = false
+		-- Anchor:EnableMouse(false)
+		-- Anchor:Hide()
+		-- for i = 1,5 do 
+			-- sCombo[i]:Hide() 
+			-- sCombo[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
+			-- sCombo[i]:RegisterEvent("UNIT_COMBO_POINTS")
+			-- sCombo[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
+		-- end
+	-- end
+-- end
 
 -- energy bar
 if not C.sCombo.energybar or not C.unitframes.enable then return end
