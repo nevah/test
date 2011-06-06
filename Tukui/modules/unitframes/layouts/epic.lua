@@ -207,16 +207,19 @@ local function Shared(self, unit)
 				self.ClassIcon = class
 			end
 			
-			local AuraTracker = CreateFrame("Frame")
-			self.AuraTracker = AuraTracker
-			
-			AuraTracker.icon = pb:CreateTexture(nil, "OVERLAY")
-			AuraTracker.icon:SetAllPoints()
-			AuraTracker.icon:SetTexCoord(0.08, 0.92, 0.18, .82)
-			
-			AuraTracker.text = T.SetFontString(pb, font2, 15, "THINOUTLINE")
-			AuraTracker.text:SetPoint("CENTER")
-			AuraTracker:SetScript("OnUpdate", updateAuraTrackerTime)
+			if C.unitframes.portraitstyle ~= "MODEL" then
+				local AuraTracker = CreateFrame("Frame")
+				self.AuraTracker = AuraTracker
+				
+				AuraTracker.icon = pb:CreateTexture(nil, "OVERLAY")
+				AuraTracker.icon:SetPoint("TOPLEFT", pb, "TOPLEFT", 2, -2)
+				AuraTracker.icon:SetPoint("BOTTOMRIGHT", pb, "BOTTOMRIGHT", -2, 2)
+				AuraTracker.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
+				
+				AuraTracker.text = T.SetFontString(pb, font2, 15, "THINOUTLINE")
+				AuraTracker.text:SetPoint("CENTER")
+				AuraTracker:SetScript("OnUpdate", updateAuraTrackerTime)
+			end
 		end
 		
 		if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
@@ -605,9 +608,8 @@ local function Shared(self, unit)
 			
 			-- ShammyShield
 				local ss = CreateFrame("StatusBar", "Shammy Shield", self)
-				ss:Point("TOPLEFT", TukuiPlayer_Portrait, "BOTTOMLEFT", 0, -5)
-				ss:Size(55, 5)
-				ss:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+				ss:Point("TOPLEFT", TukuiPlayer_Portrait, "BOTTOMLEFT", 2, -3)
+				ss:Size(43, 5)
 				ss:SetStatusBarTexture(normTex)
 				ss:SetOrientation("HORIZONTAL")
 				ss:SetMinMaxValues(0, 1)
@@ -1290,33 +1292,41 @@ local function Shared(self, unit)
 			self.Castbar.Time = castbar.time
 		end
 		
-		--portrait
-		if 	C.unitframes.focusportrait == true and lafo then
-			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
-			portrait:SetFrameLevel(8)
-			portrait:SetWidth(55)
-			portrait:Point("TOPRIGHT", health, "TOPLEFT", -7, 7)
-			portrait:Point("BOTTOMRIGHT", panel, "BOTTOMLEFT", -7, 2)
-			-- table.insert(self.__elements, T.HidePortrait)
-			portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
-			self.Portrait = portrait
-			
+		-- portraits
+		if (C["unitframes"].charportrait == true) then
 			-- Portrait Border
-			portrait.bg = CreateFrame("Frame",nil,portrait)
-			portrait.bg:CreatePanel("Default", 1 , 1, "BOTTOMLEFT", portrait, "BOTTOMLEFT", -2, -2)
-			portrait.bg:Point("TOPRIGHT", portrait, "TOPRIGHT", 2, 2)
-			portrait.bg:CreateShadow("Default")
+			pb = CreateFrame("Frame", "Focus_Portrait", self)
+			pb:CreatePanel("", 47, 1, "TOPRIGHT", health, "TOPLEFT", -6, 9)
+			pb:Point("BOTTOMRIGHT", panel, "BOTTOMLEFT", -6, 0)
+			pb:CreateShadow("Default")
 			
-			local AuraTracker = CreateFrame("Frame")
-			self.AuraTracker = AuraTracker
+			if C.unitframes.portraitstyle == "MODEL" then	
+				local portrait = CreateFrame("PlayerModel", nil, self)
+				portrait:SetFrameLevel(8)
+				portrait:Point("BOTTOMLEFT", pb, "BOTTOMLEFT", 2, 2)
+				portrait:Point("TOPRIGHT", pb, "TOPRIGHT", -2, -2)
+				portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
+				self.Portrait = portrait
+			else
+				local class = pb:CreateTexture(self:GetName().."_ClassIcon", "ARTWORK")
+				class:Point("TOPLEFT", 2, -2)
+				class:Point("BOTTOMRIGHT", -2, 2)
+				self.ClassIcon = class
+			end
 			
-			AuraTracker.icon = portrait:CreateTexture(nil, "OVERLAY")
-			AuraTracker.icon:SetAllPoints()
-			AuraTracker.icon:SetTexCoord(0.08, 0.92, 0.18, .82)
-			
-			AuraTracker.text = T.SetFontString(portrait, font2, 15, "THINOUTLINE")
-			AuraTracker.text:SetPoint("CENTER")
-			AuraTracker:SetScript("OnUpdate", updateAuraTrackerTime)
+			if C.unitframes.portraitstyle ~= "MODEL" then
+				local AuraTracker = CreateFrame("Frame")
+				self.AuraTracker = AuraTracker
+				
+				AuraTracker.icon = pb:CreateTexture(nil, "OVERLAY")
+				AuraTracker.icon:SetPoint("TOPLEFT", pb, "TOPLEFT", 2, -2)
+				AuraTracker.icon:SetPoint("BOTTOMRIGHT", pb, "BOTTOMRIGHT", -2, 2)
+				AuraTracker.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
+				
+				AuraTracker.text = T.SetFontString(pb, font2, 15, "THINOUTLINE")
+				AuraTracker.text:SetPoint("CENTER")
+				AuraTracker:SetScript("OnUpdate", updateAuraTrackerTime)
+			end
 		end
 	end
 	
