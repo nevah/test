@@ -61,6 +61,7 @@ C["unitframes"] = {
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = true,                           	-- do i really need to explain this?
+	["portraitstyle"] = "ICON",						-- MODEL vs ICON
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
 	["unicolor"] = true,                               	-- enable unicolor theme
@@ -105,7 +106,7 @@ C["actionbar"] = {
 		["secondary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 	},
 	["trinketbarX"] = 0,								-- X value for anchor
-	["trinketbarY"] = -150,								-- Y value for anchor
+	["trinketbarY"] = -300,								-- Y value for anchor
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
 	["rightbarsmouseover"] = true, 					-- Right Bars on mouseover

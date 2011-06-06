@@ -182,34 +182,39 @@ local function Shared(self, unit)
 	
 		-- portraits
 		if (C["unitframes"].charportrait == true) then
-			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
-			portrait:SetFrameLevel(8)
-			portrait:SetWidth(55)
-			if unit == "player" then
-				portrait:Point("TOPRIGHT", panel, "TOPLEFT", -5, -4)
-				portrait:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -5, 0)
-			elseif unit == "target" then
-				portrait:Point("TOPLEFT", panel, "TOPRIGHT", 5, -4)
-				portrait:Point("BOTTOMLEFT", power, "BOTTOMRIGHT", 5, 0)
-			end
-			-- table.insert(self.__elements, T.HidePortrait)
-			portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
-			self.Portrait = portrait
-			
 			-- Portrait Border
-			portrait.bg = CreateFrame("Frame",nil,portrait)
-			portrait.bg:CreatePanel("Default", 1 , 1, "BOTTOMLEFT", portrait, "BOTTOMLEFT", -2, -2)
-			portrait.bg:Point("TOPRIGHT", portrait, "TOPRIGHT", 2, 2)
-			portrait.bg:CreateShadow("Default")
+			pb = CreateFrame("Frame", self:GetName().."_Portrait", self)
+			pb:CreateShadow("Default")
+			if unit == "player" then
+				pb:CreatePanel("", 47, 1, "TOPRIGHT", panel, "TOPLEFT", -4, -2)
+				pb:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -4, -2)
+			else
+				pb:CreatePanel("", 47, 1, "TOPLEFT", panel, "TOPRIGHT", 4, -2)
+				pb:Point("BOTTOMLEFT", power, "BOTTOMRIGHT", 4, -2)
+			end
+			
+			if C.unitframes.portraitstyle == "MODEL" then	
+				local portrait = CreateFrame("PlayerModel", nil, self)
+				portrait:SetFrameLevel(8)
+				portrait:Point("BOTTOMLEFT", pb, "BOTTOMLEFT", 2, 2)
+				portrait:Point("TOPRIGHT", pb, "TOPRIGHT", -2, -2)
+				portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
+				self.Portrait = portrait
+			else
+				local class = pb:CreateTexture(self:GetName().."_ClassIcon", "ARTWORK")
+				class:Point("TOPLEFT", 2, -2)
+				class:Point("BOTTOMRIGHT", -2, 2)
+				self.ClassIcon = class
+			end
 			
 			local AuraTracker = CreateFrame("Frame")
 			self.AuraTracker = AuraTracker
 			
-			AuraTracker.icon = portrait:CreateTexture(nil, "OVERLAY")
+			AuraTracker.icon = pb:CreateTexture(nil, "OVERLAY")
 			AuraTracker.icon:SetAllPoints()
 			AuraTracker.icon:SetTexCoord(0.08, 0.92, 0.18, .82)
 			
-			AuraTracker.text = T.SetFontString(portrait, font2, 15, "THINOUTLINE")
+			AuraTracker.text = T.SetFontString(pb, font2, 15, "THINOUTLINE")
 			AuraTracker.text:SetPoint("CENTER")
 			AuraTracker:SetScript("OnUpdate", updateAuraTrackerTime)
 		end
@@ -259,7 +264,7 @@ local function Shared(self, unit)
 			local Combat = health:CreateTexture(nil, "OVERLAY")
 			Combat:Height(19)
 			Combat:Width(19)
-			Combat:SetPoint("LEFT",0,1)
+			Combat:SetPoint("BOTTOMLEFT",0,0)
 			Combat:SetVertexColor(0.69, 0.31, 0.31)
 			self.Combat = Combat
 
@@ -282,15 +287,15 @@ local function Shared(self, unit)
 			
 			-- leader icon
 			local Leader = InvFrame:CreateTexture(nil, "OVERLAY")
-			Leader:Height(14)
-			Leader:Width(14)
-			Leader:Point("TOPLEFT", 2, -6)
+			Leader:Height(12)
+			Leader:Width(12)
+			Leader:Point("TOPLEFT", 2, -13)
 			self.Leader = Leader
 			
 			-- master looter
 			local MasterLooter = InvFrame:CreateTexture(nil, "OVERLAY")
-			MasterLooter:Height(14)
-			MasterLooter:Width(14)
+			MasterLooter:Height(11)
+			MasterLooter:Width(11)
 			self.MasterLooter = MasterLooter
 			self:RegisterEvent("PARTY_LEADER_CHANGED", T.MLAnchorUpdate)
 			self:RegisterEvent("PARTY_MEMBERS_CHANGED", T.MLAnchorUpdate)

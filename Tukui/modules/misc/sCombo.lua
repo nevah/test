@@ -24,7 +24,7 @@ for i = 1, 5 do
 	sCombo[i] = CreateFrame("Frame", "sCombo"..i, UIParent)
 	sCombo[i]:CreatePanel("Default", Options.comboWidth, Options.comboHeight, "CENTER", UIParent, "CENTER", 0, 0)
 	sCombo[i]:CreateShadow("Default")
-	sCombo[i]:SetFrameStrata("HIGH")
+	sCombo[i]:SetFrameStrata("DIALOG")
 	if C.datatext.fontsize == 8 then
 		sCombo[i].text = sCombo[i]:CreateFontString(nil, "OVERLAY")
 		sCombo[i].text:SetFont(C.datatext.font, C.datatext.fontsize)

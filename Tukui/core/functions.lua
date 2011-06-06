@@ -842,18 +842,10 @@ T.EclipseDisplay = function(self, login)
 end
 
 T.MLAnchorUpdate = function (self)
-	if C.unitframes.layout ~= 2 then
-		if self.Leader:IsShown() then
-			self.MasterLooter:Point("TOPLEFT", 14, -5)
-		else
-			self.MasterLooter:Point("TOPLEFT", 2, -5)
-		end
+	if self.Leader:IsShown() then
+		self.MasterLooter:Point("TOPLEFT", 14, -12)
 	else
-		if self.Leader:IsShown() then
-			self.MasterLooter:Point("LEFT", self, "TOPLEFT", 14, -2)
-		else
-			self.MasterLooter:Point("LEFT", self, "TOPLEFT", 2, -2)
-		end
+		self.MasterLooter:Point("TOPLEFT", 2, -12)
 	end
 end
 

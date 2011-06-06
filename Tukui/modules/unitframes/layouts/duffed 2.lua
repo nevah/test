@@ -216,6 +216,7 @@ local function Shared(self, unit)
 				local class = pb:CreateTexture(self:GetName().."_ClassIcon", "ARTWORK")
 				class:Point("TOPLEFT", 2, -2)
 				class:Point("BOTTOMRIGHT", -2, 2)
+				class:SetTexCoord(0.07,0.93,0.57,0.83)
 				self.ClassIcon = class
 			end
 			

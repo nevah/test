@@ -267,6 +267,7 @@ SMSkin:SetScript("OnEvent", function(self, event, addon)
 	shieldmonitor_Frame:SetSize(TukuiPlayer:GetWidth()+4, 12)
 	shieldmonitor_Frame:ClearAllPoints()
 	shieldmonitor_Frame:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 2, -11)
+	shieldmonitor_Frame:CreateShadow("Default")
 	shieldmonitor_Frame:SetFrameStrata("HIGH")
 	
 	shieldmonitor_Bar:SetStatusBarTexture(C.media.normTex)
