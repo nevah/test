@@ -44,12 +44,9 @@ for i, v in ipairs(C.actionbar.custombar.primary) do
 	-- hoverover stuffz
 	customprimarybutton[i]:StyleButton()
 	-- cooldown stuffz
---local LastUpdate = .5
 	
 local function Update(self, t)
---LastUpdate = LastUpdate - t
 
---if LastUpdate < 0 then
 	local name = GetItemInfo(v)
 		if IsEquippedItem(name) == 1 then
 			customprimarybutton[i].value:Hide()
@@ -79,11 +76,20 @@ local function Update(self, t)
 			else
 			customprimarybutton[i].texture:SetVertexColor(.35, .35, .35)
 			end
+		elseif IsEquippableItem(name) == nil then
+			customprimarybutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
+			local start, duration, enabled = GetItemCooldown(v)
+			customprimarybutton[i]:SetAttribute("type", "item");
+			customprimarybutton[i]:SetAttribute("item", GetItemInfo(v))
+			if enabled ~= 0 then
+			customprimarybutton[i].texture:SetVertexColor(1,1,1)
+			customprimarybutton[i].cooldown:SetCooldown(start, duration)
+			else
+			customprimarybutton[i].texture:SetVertexColor(.35, .35, .35)
+			end
 		else
 			customprimarybutton[i].value:Show()
 		end
-		--LastUpdate = .5 -- now reset the variable
-	--end
 end
 	customprimarybutton[i]:SetScript("OnUpdate", Update)
 end

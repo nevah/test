@@ -18,12 +18,11 @@ end
 if T.myname == "Epicgrim" then
 	C.actionbar.hideshapeshift = true
 	C.unitframes.classbar = false
-	C.actionbar.custombar.primary = {"Rebirth", "Innervate", "Darkflight"}
-	C.actionbar.custombar.secondary = {"Rebirth", "Innervate", "Darkflight", 58184}
+	C.actionbar.custombar.primary = {"Rebirth", "Innervate", "Tranquility", "Darkflight", 58091}
 end
 
 if T.myname == "Epicelement" then
-	C.actionbar.custombar.primary = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
+	C.actionbar.custombar.primary = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace", 59354}
 	C.actionbar.custombar.secondary = {"Heroism", "Lifeblood", "Earth Elemental Totem", "Spiritwalker's Grace"}
 end
 
