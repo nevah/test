@@ -16,80 +16,212 @@ else
 	custombar:Hide()
 end
 
-local customprimarybutton = CreateFrame("Button", "CustomPrimaryButton", custombar, "SecureActionButtonTemplate")
-custombar:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
--- spell stuffz
-for i, v in ipairs(C.actionbar.custombar.primary) do	
-	--button stuffz
-	customprimarybutton[i] = CreateFrame("Button", "CustomPrimaryButton"..i, custombar, "SecureActionButtonTemplate")
-	customprimarybutton[i]:CreatePanel("Default", 35, 35, "TOPLEFT", custombar, "TOPLEFT", 2, -2)
-	if i ~= 1 then
-		customprimarybutton[i]:SetPoint("TOPLEFT", customprimarybutton[i-1], "TOPRIGHT", 2, 0)
+local function MakePrimaryButtons()
+	local custombutton = {}
+	custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
+	if GetActiveTalentGroup() == 1 then
+		custombar:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
+	else
+		custombar:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
 	end
-	-- texture settup
-	customprimarybutton[i].texture = customprimarybutton[i]:CreateTexture(nil, "BORDER")
-	customprimarybutton[i].texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-	customprimarybutton[i].texture:Point("TOPLEFT", customprimarybutton[i] ,"TOPLEFT", 2, -2)
-	customprimarybutton[i].texture:Point("BOTTOMRIGHT", customprimarybutton[i] ,"BOTTOMRIGHT", -2, 2)
-	-- cooldown overlay
-	customprimarybutton[i].cooldown = CreateFrame("Cooldown", "$parentCD", customprimarybutton[i], "CooldownFrameTemplate")
-	customprimarybutton[i].cooldown:SetAllPoints(customprimarybutton[i].texture)				
-	-- text settup
-	customprimarybutton[i].value = customprimarybutton[i]:CreateFontString(nil, "ARTWORK")
-	customprimarybutton[i].value:SetFont(C["media"].font, 12, "OUTLINE")
-	customprimarybutton[i].value:SetText("ERROR")
-	customprimarybutton[i].value:SetTextColor(1, 0, 0)
-	customprimarybutton[i].value:Hide()
-	customprimarybutton[i].value:Point("CENTER", customprimarybutton[i], "CENTER")
-	-- hoverover stuffz
-	customprimarybutton[i]:StyleButton()
-	-- cooldown stuffz
-	
-local function Update(self, t)
-
-	local name = GetItemInfo(v)
-		if IsEquippedItem(name) == 1 then
-			customprimarybutton[i].value:Hide()
-			local trinket1id = GetInventoryItemID("player", 13)
-			local trinket2id = GetInventoryItemID("player", 14)
-			local var = 0
-			if trinket1id == v then var = 13 elseif trinket2id == v then var = 14 end
-			customprimarybutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
-			local start, duration, enabled = GetItemCooldown(v)
-			customprimarybutton[i]:SetAttribute("type", "item");
-			customprimarybutton[i]:SetAttribute("item", var)
-			if enabled ~= 0 then
-			customprimarybutton[i].texture:SetVertexColor(1,1,1)
-			customprimarybutton[i].cooldown:SetCooldown(start, duration)
-			else
-			customprimarybutton[i].texture:SetVertexColor(.35, .35, .35)
-			end
-		elseif GetSpellInfo(v) == v then
-			customprimarybutton[i].value:Hide()
-			customprimarybutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
-			local start, duration, enabled = GetSpellCooldown(v)
-			customprimarybutton[i]:SetAttribute("type", "spell");
-			customprimarybutton[i]:SetAttribute("spell", v)
-			if enabled ~= 0 then
-			customprimarybutton[i].texture:SetVertexColor(1,1,1)
-			customprimarybutton[i].cooldown:SetCooldown(start, duration)
-			else
-			customprimarybutton[i].texture:SetVertexColor(.35, .35, .35)
-			end
-		elseif IsEquippableItem(name) == nil then
-			customprimarybutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
-			local start, duration, enabled = GetItemCooldown(v)
-			customprimarybutton[i]:SetAttribute("type", "item");
-			customprimarybutton[i]:SetAttribute("item", GetItemInfo(v))
-			if enabled ~= 0 then
-			customprimarybutton[i].texture:SetVertexColor(1,1,1)
-			customprimarybutton[i].cooldown:SetCooldown(start, duration)
-			else
-			customprimarybutton[i].texture:SetVertexColor(.35, .35, .35)
-			end
-		else
-			customprimarybutton[i].value:Show()
+	-- spell stuffz
+	for i, v in ipairs(C.actionbar.custombar.primary) do	
+		--button stuffz
+		custombutton[i] = CreateFrame("Button", "primarycustombutton"..i, custombar, "SecureActionButtonTemplate")
+		custombutton[i]:CreatePanel("Default", 35, 35, "TOPLEFT", custombar, "TOPLEFT", 2, -2)
+		if i ~= 1 then
+			custombutton[i]:SetPoint("TOPLEFT", custombutton[i-1], "TOPRIGHT", 2, 0)
 		end
+		-- texture settup
+		custombutton[i].texture = custombutton[i]:CreateTexture(nil, "BORDER")
+		custombutton[i].texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		custombutton[i].texture:Point("TOPLEFT", custombutton[i] ,"TOPLEFT", 2, -2)
+		custombutton[i].texture:Point("BOTTOMRIGHT", custombutton[i] ,"BOTTOMRIGHT", -2, 2)
+		-- cooldown overlay
+		custombutton[i].cooldown = CreateFrame("Cooldown", "$parentCD", custombutton[i], "CooldownFrameTemplate")
+		custombutton[i].cooldown:SetAllPoints(custombutton[i].texture)				
+		-- text settup
+		custombutton[i].value = custombutton[i]:CreateFontString(nil, "ARTWORK")
+		custombutton[i].value:SetFont(C["media"].font, 12, "OUTLINE")
+		custombutton[i].value:SetText("ERROR")
+		custombutton[i].value:SetTextColor(1, 0, 0)
+		custombutton[i].value:Hide()
+		custombutton[i].value:Point("CENTER", custombutton[i], "CENTER")
+		-- hoverover stuffz
+		custombutton[i]:StyleButton()
+		-- cooldown stuffz
+		local function Update(self, t)
+		local name = GetItemInfo(v)
+			if IsEquippedItem(name) == 1 then
+				custombutton[i].value:Hide()
+				local trinket1id = GetInventoryItemID("player", 13)
+				local trinket2id = GetInventoryItemID("player", 14)
+				local var = 0
+				if trinket1id == v then var = 13 elseif trinket2id == v then var = 14 end
+				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
+				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i]:SetAttribute("type", "item");
+				custombutton[i]:SetAttribute("item", var)
+				if enabled ~= 0 then
+				custombutton[i].texture:SetVertexColor(1,1,1)
+				custombutton[i].cooldown:SetCooldown(start, duration)
+				else
+				custombutton[i].texture:SetVertexColor(.35, .35, .35)
+				end
+			elseif GetSpellInfo(v) == v then
+				custombutton[i].value:Hide()
+				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
+				local start, duration, enabled = GetSpellCooldown(v)
+				custombutton[i]:SetAttribute("type", "spell");
+				custombutton[i]:SetAttribute("spell", v)
+				if enabled ~= 0 then
+				custombutton[i].texture:SetVertexColor(1,1,1)
+				custombutton[i].cooldown:SetCooldown(start, duration)
+				else
+				custombutton[i].texture:SetVertexColor(.35, .35, .35)
+				end
+			elseif IsEquippableItem(name) == nil then
+			if type(v) == "number" then
+				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
+				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i]:SetAttribute("type", "item");
+				custombutton[i]:SetAttribute("item", GetItemInfo(v))
+				if enabled ~= 0 then
+				custombutton[i].texture:SetVertexColor(1,1,1)
+				custombutton[i].cooldown:SetCooldown(start, duration)
+				else
+				custombutton[i].texture:SetVertexColor(.35, .35, .35)
+				end
+			end
+			else
+				custombutton[i].value:Show()
+			end
+		end
+		custombutton[i]:SetScript("OnUpdate", Update)
+	end
 end
-	customprimarybutton[i]:SetScript("OnUpdate", Update)
+
+local function MakeSecondaryButtons()
+	local custombutton = {}
+	custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
+	if GetActiveTalentGroup() == 1 then
+		custombar:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
+	else
+		custombar:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
+	end
+	-- spell stuffz
+	for i, v in ipairs(C.actionbar.custombar.secondary) do	
+		--button stuffz
+		custombutton[i] = CreateFrame("Button", "secondarycustombutton"..i, custombar, "SecureActionButtonTemplate")
+		custombutton[i]:CreatePanel("Default", 35, 35, "TOPLEFT", custombar, "TOPLEFT", 2, -2)
+		if i ~= 1 then
+			custombutton[i]:SetPoint("TOPLEFT", custombutton[i-1], "TOPRIGHT", 2, 0)
+		end
+		-- texture settup
+		custombutton[i].texture = custombutton[i]:CreateTexture(nil, "BORDER")
+		custombutton[i].texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		custombutton[i].texture:Point("TOPLEFT", custombutton[i] ,"TOPLEFT", 2, -2)
+		custombutton[i].texture:Point("BOTTOMRIGHT", custombutton[i] ,"BOTTOMRIGHT", -2, 2)
+		-- cooldown overlay
+		custombutton[i].cooldown = CreateFrame("Cooldown", "$parentCD", custombutton[i], "CooldownFrameTemplate")
+		custombutton[i].cooldown:SetAllPoints(custombutton[i].texture)				
+		-- text settup
+		custombutton[i].value = custombutton[i]:CreateFontString(nil, "ARTWORK")
+		custombutton[i].value:SetFont(C["media"].font, 12, "OUTLINE")
+		custombutton[i].value:SetText("ERROR")
+		custombutton[i].value:SetTextColor(1, 0, 0)
+		custombutton[i].value:Hide()
+		custombutton[i].value:Point("CENTER", custombutton[i], "CENTER")
+		-- hoverover stuffz
+		custombutton[i]:StyleButton()
+		-- cooldown stuffz
+		local function Update(self, t)
+		local name = GetItemInfo(v)
+			if IsEquippedItem(name) == 1 then
+				custombutton[i].value:Hide()
+				local trinket1id = GetInventoryItemID("player", 13)
+				local trinket2id = GetInventoryItemID("player", 14)
+				local var = 0
+				if trinket1id == v then var = 13 elseif trinket2id == v then var = 14 end
+				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
+				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i]:SetAttribute("type", "item");
+				custombutton[i]:SetAttribute("item", var)
+				if enabled ~= 0 then
+				custombutton[i].texture:SetVertexColor(1,1,1)
+				custombutton[i].cooldown:SetCooldown(start, duration)
+				else
+				custombutton[i].texture:SetVertexColor(.35, .35, .35)
+				end
+			elseif GetSpellInfo(v) == v then
+				custombutton[i].value:Hide()
+				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
+				local start, duration, enabled = GetSpellCooldown(v)
+				custombutton[i]:SetAttribute("type", "spell");
+				custombutton[i]:SetAttribute("spell", v)
+				if enabled ~= 0 then
+				custombutton[i].texture:SetVertexColor(1,1,1)
+				custombutton[i].cooldown:SetCooldown(start, duration)
+				else
+				custombutton[i].texture:SetVertexColor(.35, .35, .35)
+				end
+			elseif IsEquippableItem(name) == nil then
+			if type(v) == "number" then
+				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
+				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i]:SetAttribute("type", "item");
+				custombutton[i]:SetAttribute("item", GetItemInfo(v))
+				if enabled ~= 0 then
+				custombutton[i].texture:SetVertexColor(1,1,1)
+				custombutton[i].cooldown:SetCooldown(start, duration)
+				else
+				custombutton[i].texture:SetVertexColor(.35, .35, .35)
+				end
+			end
+			else
+				custombutton[i].value:Show()
+			end
+		end
+		custombutton[i]:SetScript("OnUpdate", Update)
+	end
 end
+
+local function Kill()
+	if GetActiveTalentGroup() ~= 1 then
+		for i = 1, totalprimary do
+			_G["primarycustombutton"..i]:Kill()
+			_G["primarycustombutton"..i] = nil
+			_G["primarycustombutton"..i.."CD"]:Kill()
+		end
+	else
+		for i = 1, totalsecondary do
+			_G["secondarycustombutton"..i]:Kill()
+			_G["secondarycustombutton"..i] = nil
+			_G["secondarycustombutton"..i.."CD"]:Kill()
+		end
+	end		
+end
+
+
+local function OnEvent(self, event)
+	if event == "PLAYER_ENTERING_WORLD" then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		if GetActiveTalentGroup() == 1 then
+			MakePrimaryButtons()
+		else
+			MakeSecondaryButtons()
+		end
+	else
+		Kill()
+		if GetActiveTalentGroup() == 1 then
+			MakePrimaryButtons()
+		else
+			MakeSecondaryButtons()
+		end
+	end
+end
+
+local f = CreateFrame("Frame", nil, UIParent)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+f:SetScript("OnEvent", OnEvent)

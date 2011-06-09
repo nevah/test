@@ -809,7 +809,6 @@ local function Shared(self, unit)
 					castbar.button:Point("TOPLEFT", TukuiTarget_Portrait, "TOPLEFT", -2, 2)
 					castbar.button:Point("BOTTOMRIGHT", TukuiTarget_Portrait, "BOTTOMRIGHT", 2, -2)
 					castbar.button.shadow:Hide()
-					castbar.icon:SetTexCoord(0.08, 0.92, 0.18, .82)
 				end
 			end
 			
