@@ -189,39 +189,34 @@ end
 local function Kill()
 	if GetActiveTalentGroup() ~= 1 then
 		for i = 1, totalprimary do
-			_G["primarycustombutton"..i]:Kill()
-			_G["primarycustombutton"..i] = nil
-			_G["primarycustombutton"..i.."CD"]:Kill()
+			if _G["primarycustombutton"..i] then
+				_G["primarycustombutton"..i]:Kill()
+				_G["primarycustombutton"..i] = nil
+				_G["primarycustombutton"..i.."CD"]:Kill()
+			end
 		end
 	else
 		for i = 1, totalsecondary do
-			_G["secondarycustombutton"..i]:Kill()
-			_G["secondarycustombutton"..i] = nil
-			_G["secondarycustombutton"..i.."CD"]:Kill()
+			if _G["secondarycustombutton"..i] then
+				_G["secondarycustombutton"..i]:Kill()
+				_G["secondarycustombutton"..i] = nil
+				_G["secondarycustombutton"..i.."CD"]:Kill()
+			end
 		end
 	end		
 end
 
 
 local function OnEvent(self, event)
-	if event == "PLAYER_ENTERING_WORLD" then
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-		if GetActiveTalentGroup() == 1 then
-			MakePrimaryButtons()
-		else
-			MakeSecondaryButtons()
-		end
+	Kill()
+	if GetActiveTalentGroup() == 1 then
+		MakePrimaryButtons()
 	else
-		Kill()
-		if GetActiveTalentGroup() == 1 then
-			MakePrimaryButtons()
-		else
-			MakeSecondaryButtons()
-		end
+		MakeSecondaryButtons()
 	end
 end
 
 local f = CreateFrame("Frame", nil, UIParent)
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("PLAYER_LOGIN")
 f:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 f:SetScript("OnEvent", OnEvent)
