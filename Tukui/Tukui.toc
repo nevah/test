@@ -8,7 +8,7 @@
 ## Notes: UI of awesomeness! (based off Duffed UI)
 ## SavedVariables: TukuiData
 ## SavedVariablesPerCharacter: TukuiDataPerChar
-## OptionalDeps: Tukui_ConfigUI, !ClassColors, Clique, Recount, Omen, a, b, nibHideBlackBar, Skada, TelUI_AddonSkins, TinyDPS, Quartz, CooldownToGo, spellstealer, KLE
+## OptionalDeps: Tukui_ConfigUI, !ClassColors, Clique, Recount, Omen, a, b, nibHideBlackBar, Skada, TelUI_AddonSkins, TinyDPS, Quartz, CooldownToGo, spellstealer, KLE, DXE
 ## X-oUF: oUFTukui
 
 Tukui.xml

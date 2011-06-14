@@ -106,7 +106,7 @@ C["actionbar"] = {
 		["secondary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
 	},
 	["trinketbarX"] = 0,								-- X value for anchor
-	["trinketbarY"] = -300,								-- Y value for anchor
+	["trinketbarY"] = -200,								-- Y value for anchor
 	["swapbar1and3"] = false,							-- Swap Bar 1 and 3 (Mainbar with the third at the Top)
 	["disablebar2"] = false,							-- Turn Bar 2 on/off
 	["rightbarsmouseover"] = true, 					-- Right Bars on mouseover
@@ -146,6 +146,7 @@ C["Addon_Skins"] = {
 	["KLE"] = true,										-- Enable KLE Skin
 	["TinyDPS"] = true,									-- Enable TinyDPS Skin
 	["Quartz"] = true,									-- Enable Quartz Skin
+	["dxe"] = true,
 }
 
 C["sCombo"] = {

@@ -152,6 +152,7 @@
 	<Script file="modules\skins\addons\KLE.lua"/>
 	<Script file="modules\skins\addons\TinyDPS.lua"/>
 	<Script file="modules\skins\addons\Quartz.lua"/>
+	<Script file="modules\skins\addons\dxe.lua"/>
 	
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>

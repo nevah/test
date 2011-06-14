@@ -805,7 +805,7 @@ local function Shared(self, unit)
 				if unit == "player" then
 					castbar.button:Size(25)
 					castbar.button:Point("RIGHT",castbar,"LEFT", -5, 0)
-				elseif unit == "target" then
+				elseif (unit == "target") and (C["unitframes"].charportrait == true) then
 					castbar.button:Point("TOPLEFT", TukuiTarget_Portrait, "TOPLEFT", -2, 2)
 					castbar.button:Point("BOTTOMRIGHT", TukuiTarget_Portrait, "BOTTOMRIGHT", 2, -2)
 					castbar.button.shadow:Hide()
