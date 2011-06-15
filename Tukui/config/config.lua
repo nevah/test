@@ -22,7 +22,6 @@ C["general"] = {
 C["panels"] = {
 	["switchchats"] = false,								-- Switchs loot and meters with chat frame 1's location (REQUIRES /RESETUI)
 		["switchdatatext"] = false,						-- (Only works if ["switchchats"] = true) Switch the attached datatext with the chat.
-
 }
 
 C["unitframes"] = {
