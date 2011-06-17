@@ -209,8 +209,8 @@ local function CreateAuraHeader(filter, ...)
 	return header
 end
 
-ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", Minimap, "TOPLEFT", -11, 0))
-ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", Minimap, "BOTTOMLEFT", -11, 5))
+ScanAuras(CreateAuraHeader("HELPFUL", "TOPLEFT", UIParent, "TOPLEFT", 8, -8))
+ScanAuras(CreateAuraHeader("HARMFUL", "TOPLEFT", UIParent, "TOPLEFT", 8, -110))
 
 -- create our aura
 local start = CreateFrame("Frame")

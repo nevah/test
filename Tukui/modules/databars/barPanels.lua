@@ -12,7 +12,7 @@ if T.maxDatabars == 0 then return end
 for i = 1, T.maxDatabars do
 	T.databars[i] = CreateFrame("Frame", "TukuiDataBar"..i.."_Panel", UIParent)
 	if i == 1 then
-		T.databars[i]:CreatePanel("ThickTransparent", pWidth, pHeight, "TOPLEFT", UIParent, "TOPLEFT", 10, -10)
+		T.databars[i]:CreatePanel("ThickTransparent", pWidth, pHeight, "TOPRIGHT", TukuiMinimap, "TOPLEFT", -12, -2)
 	else
 		T.databars[i]:CreatePanel("ThickTransparent", pWidth, pHeight, "TOPRIGHT", T.databars[i-1], "BOTTOMRIGHT", 0, -C.databars.settings.spacing)
 	end
@@ -58,14 +58,15 @@ databarsBG = CreateFrame("Frame", "TukuiDataBarBG", UIParent)
 databarsBG:CreatePanel("ThickTransparent", 0, 0, "TOP", T.databars[1], "TOP", 0, 0)
 databarsBG:Point("TOPLEFT", T.databars[1], "TOPLEFT", -2, 2)
 databarsBG:Point("BOTTOMRIGHT", T.databars[T.maxDatabars], "BOTTOMRIGHT", 2, -2)
+databarsBG:CreateShadow("Default")
 
 -- Lines
 line1 = CreateFrame("Frame", nil, databarsBG)
-line1:CreatePanel("Default", 15, 2, "RIGHT", databarsBG, "LEFT", 1, 35)
+line1:CreatePanel("Default", 12, 2, "LEFT", databarsBG, "RIGHT", -1, 35)
 line1:SetFrameStrata("BACKGROUND")
 
 line2 = CreateFrame("Frame", nil, databarsBG)
-line2:CreatePanel("Default", 15, 2, "RIGHT", databarsBG, "LEFT", 1, -35)
+line2:CreatePanel("Default", 12, 2, "LEFT", databarsBG, "RIGHT", -1, -35)
 line2:SetFrameStrata("BACKGROUND")
 
 -- Toggle

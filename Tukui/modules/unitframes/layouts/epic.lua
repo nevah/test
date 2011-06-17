@@ -558,7 +558,7 @@ local function Shared(self, unit)
 						Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, health)
 						Runes[i]:SetHeight(5)
 						if (i == 1) then
-							Runes[i]:Width(((playerwidth) / 6)+2)
+							Runes[i]:Width(((playerwidth) / 6)-2)
 							Runes[i]:Point("LEFT", Runes.border, "LEFT", 2, 0)
 						else
 							Runes[i]:Width(((playerwidth) / 6)-1)
@@ -1737,12 +1737,12 @@ oUF:RegisterStyle('Tukui', Shared)
 
 -- player
 local player = oUF:Spawn('player', "TukuiPlayer")
-player:Point("BOTTOMRIGHT", TukuiBar1, "TOPLEFT", -20,150)
+player:Point("CENTER", UIParent, "CENTER", -306,-170)
 player:Size(playerwidth, 43)
 
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
-target:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", 20,150)
+target:Point("CENTER", UIParent, "CENTER", 306,-170)
 target:Size(playerwidth, 43)
 
 -- tot

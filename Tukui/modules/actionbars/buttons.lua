@@ -198,7 +198,7 @@ TBtoggle:SetScript("OnClick", function(self, btn)
 	end
 end)
 TBtoggle:Size(18,18)
-TBtoggle:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 3, 0)
+TBtoggle:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 4, 0)
 TBtoggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C.datatext.color)) end)
 TBtoggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
 TBtoggle.text = T.SetFontString(TBtoggle, C.datatext.font, C.datatext.fontsize)

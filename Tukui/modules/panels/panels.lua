@@ -229,7 +229,7 @@ end
 
 -- BNToastFrame Anchorframe
 local bnet = CreateFrame("Frame", "TukuiBnetHolder", UIParent)
-bnet:CreatePanel("Default", BNToastFrame:GetWidth(), BNToastFrame:GetHeight(), "TOPLEFT", UIParent, "TOPLEFT", C.databars.settings.width + 18, -4)
+bnet:CreatePanel("Default", BNToastFrame:GetWidth(), BNToastFrame:GetHeight(), "TOPRIGHT", TukuiMinimap, "TOPLEFT", -(C.databars.settings.width+16), 0)
 bnet:SetClampedToScreen(true)
 bnet:SetMovable(true)
 bnet:SetBackdropBorderColor(1,0,0)

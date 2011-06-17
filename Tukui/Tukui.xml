@@ -56,6 +56,7 @@
 	
 	<Script file="modules\extras\customactionbar.lua"/>
 	<Script file="modules\extras\trinkets.lua"/>
+	<Script file="modules\extras\Smushroom.lua"/>
 	
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
