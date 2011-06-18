@@ -8,7 +8,13 @@ local function ShowOrHideBar(bar, button)
 	local db = TukuiDataPerChar
 	
 	if bar:IsShown() then
-		if bar == TukuiBar2 then
+		if bar == TukuiBarLeft then
+			if button == TukuiBar2Button then
+				bar:Hide()
+				db.hidebar2 = true
+			end
+		end
+		if bar == TukuiBarRight then
 			if button == TukuiBar2Button then
 				bar:Hide()
 				db.hidebar2 = true
@@ -34,7 +40,7 @@ local function ShowOrHideBar(bar, button)
 		end
 	else
 		bar:Show()
-		if bar == TukuiBar2 then
+		if bar == TukuiBarLeft then
 			db.hidebar2 = false
 		end
 		if bar == TukuiBar3 then
@@ -52,8 +58,6 @@ local function MoveButtonBar(button, bar)
 	local db = TukuiDataPerChar
 	
 	if button == TukuiBar2Button then
-		T.petBarPosition()
-		T.cbPosition()
 		if bar:IsShown() then
 			button.text:SetText(cm.."-|r")
 		else
@@ -112,7 +116,8 @@ TukuiBar2Button:SetScript("OnClick", function(self, btn)
 			ToggleFrame(TukuiInfoLeftBattleGround)
 		end
 	else
-		DrPepper(self, TukuiBar2)
+		DrPepper(self, TukuiBarLeft)
+		DrPepper(self, TukuiBarRight)
 	end
 end)
 TukuiBar2Button:Size(18,18)
@@ -213,14 +218,14 @@ init:RegisterEvent("VARIABLES_LOADED")
 init:SetScript("OnEvent", function(self, event)
 	if not TukuiDataPerChar then TukuiDataPerChar = {} end
 	local db = TukuiDataPerChar
-	if db.hidebar2 == nil and T.lowversion then db.hidebar2 = true end
 	
 	T.cbPosition()
 	T.petBarPosition()
 	
-	-- Third Bar at the bottom
+	-- Third Bar Split on each Side
 	if db.hidebar2 then
-		DrPepper(TukuiBar2Button, TukuiBar2)
+		DrPepper(TukuiBar2Button, TukuiBarLeft)
+		DrPepper(TukuiBar2Button, TukuiBarRight)
 	end
 	
 	-- Rightbars on startup

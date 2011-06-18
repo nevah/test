@@ -7,7 +7,17 @@ if not C["actionbar"].enable == true then return end
 
 -- used for anchor totembar or shapeshiftbar
 local TukuiShift = CreateFrame("Frame","TukuiShiftBar", ChatBG1)
-TukuiShift:SetPoint("BOTTOMLEFT", ChatBG1, "BOTTOMRIGHT", 10, T.buttonspacing)
+if TukuiBarLeft:IsShown() then
+	TukuiShift:SetPoint("BOTTOMLEFT", TukuiBarLeft, "BOTTOMRIGHT", 10, T.buttonspacing)
+else
+	TukuiShift:SetPoint("BOTTOMLEFT", ChatBG1, "BOTTOMRIGHT", 10, T.buttonspacing)
+end
+TukuiBarLeft:HookScript("OnShow", function(self)
+	TukuiShift:SetPoint("BOTTOMLEFT", TukuiBarLeft, "BOTTOMRIGHT", 10, T.buttonspacing)
+end)
+TukuiBarLeft:HookScript("OnHide", function(self)
+	TukuiShift:SetPoint("BOTTOMLEFT", ChatBG1, "BOTTOMRIGHT", 10, T.buttonspacing)
+end)
 TukuiShift:SetSize((T.petbuttonsize * 5) + (T.petbuttonsize * 4), 40)
 TukuiShift:SetFrameStrata("MEDIUM")
 TukuiShift:SetMovable(true)

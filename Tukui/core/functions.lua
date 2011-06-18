@@ -331,7 +331,7 @@ T.cbSize = function()
 
 	local x = 4
 	if C.castbar.cbicons then x = 32 end
-	TukuiPlayerCastBar:Width(TukuiBar2:GetWidth() - x)
+	TukuiPlayerCastBar:Width(TukuiBar1:GetWidth() - x)
 end
 
 -- Castbar Position
@@ -342,24 +342,15 @@ T.cbPosition = function()
 	local x = 0
 	local y = 5
 	if C.castbar.cbicons then x = 14 end
-	if TukuiDataPerChar.hidebar2 == true then
-		TukuiPlayerCastBar:ClearAllPoints()
-		TukuiPlayerCastBar:Point("BOTTOM", TukuiBar1, "TOP", x, y)
-	else
-		TukuiPlayerCastBar:ClearAllPoints()
-		TukuiPlayerCastBar:Point("BOTTOMRIGHT", TukuiBar2, "TOPRIGHT", -2, y)
-	end
+	TukuiPlayerCastBar:ClearAllPoints()
+	TukuiPlayerCastBar:Point("BOTTOM", TukuiBar1, "TOP", x, y)
 end
 
 -- Petbarposition
 T.petBarPosition = function()
 if C["actionbar"].petbarhorizontal ~= true or InCombatLockdown() then return end
 	TukuiPetBar:ClearAllPoints()
-	if TukuiDataPerChar.hidebar2 == true then
-		TukuiPetBar:Point("BOTTOM", TukuiBar1, "TOP", 0, 4)
-	else
-		TukuiPetBar:Point("BOTTOM", TukuiBar2, "TOP", 0, 4)
-	end
+	TukuiPetBar:Point("BOTTOM", TukuiBar1, "TOP", 0, 4)
 end
 
 function T.CommaValue(amount)

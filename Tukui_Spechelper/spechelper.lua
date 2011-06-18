@@ -44,9 +44,9 @@ local function AutoGear(set1, set2)
 	local name1 = GetEquipmentSetInfo(set1)
 	local name2 = GetEquipmentSetInfo(set2)
 	if GetActiveTalentGroup() == 1 then
-		UseEquipmentSet(name1)
+		if name1 then UseEquipmentSet(name1) end
 	else
-		UseEquipmentSet(name2)
+		if name2 then UseEquipmentSet(name2) end
 	end
 end
 
@@ -80,7 +80,7 @@ spec:CreatePanel("Default", 1, 20, "TOPRIGHT", UIParent, "TOPRIGHT", -32, -212)
 	if int > 0 then return end
 		if not GetPrimaryTalentTree() then spec.t:SetText("No talents") return end
 		local tree1, tree2, tree3, Tree = ActiveTalents()
-		name = select(2, GetTalentTabInfo(Tree))
+		local name = select(2, GetTalentTabInfo(Tree))
 		spec.t:SetText(name.." "..panelcolor..tree1.."/"..tree2.."/"..tree3)
 		if HasDualSpec() then
 			local sTree1, sTree2, sTree3, sTree = UnactiveTalents()
@@ -274,12 +274,14 @@ for i = 1, 10 do
 		gearSets[i]:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
 		gearSets[i]:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)
 		
-		gearSets[1]:SetBackdropBorderColor(0,1,0)
-		gearSets[2]:SetBackdropBorderColor(1,0,0)
-		gearSets[1]:SetScript("OnEnter", nil)
-		gearSets[1]:SetScript("OnLeave", nil)
-		gearSets[2]:SetScript("OnEnter", nil)
-		gearSets[2]:SetScript("OnLeave", nil)
+		if Autogearswap == true then
+			gearSets[1]:SetBackdropBorderColor(0,1,0)
+			gearSets[2]:SetBackdropBorderColor(1,0,0)
+			gearSets[1]:SetScript("OnEnter", nil)
+			gearSets[1]:SetScript("OnLeave", nil)
+			gearSets[2]:SetScript("OnEnter", nil)
+			gearSets[2]:SetScript("OnLeave", nil)
+		end
 	end)
 end	
 -- Auto Gear swapping

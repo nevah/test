@@ -17,23 +17,6 @@ if C.general.colorscheme == true then
 	TukuiBar1:SetBackdropColor(unpack(C.general.color))
 end
 
-local TukuiBar2 = CreateFrame("Frame", "TukuiBar2", UIParent, "SecureHandlerStateTemplate") -- Bar on top of Main bar (12)
-TukuiBar2:CreatePanel("Default", 1, 1, "BOTTOM", TukuiBar1, "TOP", 0, 10)
-TukuiBar2:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
-TukuiBar2:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
-
-TukuiBar2line1 = CreateFrame("Frame", nil, TukuiBar2)
-TukuiBar2line1:CreatePanel("Default", 2, 10, "TOPLEFT", TukuiBar2, "BOTTOMRIGHT", -20, 0)
-TukuiBar2line1:SetFrameStrata("BACKGROUND")
-
-TukuiBar2line2 = CreateFrame("Frame", nil, TukuiBar2)
-TukuiBar2line2:CreatePanel("Default", 2, 10, "TOPRIGHT", TukuiBar2, "BOTTOMLEFT", 20, 0)
-TukuiBar2line2:SetFrameStrata("BACKGROUND")
-
-if C.general.colorscheme == true then
-	TukuiBar2:SetBackdropColor(unpack(C.general.color))
-end
-
 local TukuiBar3 = CreateFrame("Frame", "TukuiBar3", UIParent) -- Rightbars
 TukuiBar3:CreatePanel("Default", 1, 1, "RIGHT", UIParent, "RIGHT", -14, -14)
 TukuiBar3:SetWidth((T.buttonsize * 2) + (T.buttonspacing * 3))
@@ -45,7 +28,7 @@ end
 
 local petbg = CreateFrame("Frame", "TukuiPetBar", UIParent, "SecureHandlerStateTemplate")
 if C["actionbar"].petbarhorizontal == true then
-	petbg:CreatePanel("Default",(T.hpetbuttonsize * 10) + (T.petbuttonspacing * 11) - 4, T.hpetbuttonsize + (T.petbuttonspacing * 2)-4, "BOTTOM", TukuiBar2, "TOP", 0, 0)
+	petbg:CreatePanel("Default",(T.hpetbuttonsize * 10) + (T.petbuttonspacing * 11) - 4, T.hpetbuttonsize + (T.petbuttonspacing * 2)-4, "BOTTOM", TukuiBar1, "TOP", 0, 0)
 else
 	petbg:CreatePanel("Default", T.petbuttonsize + (T.petbuttonspacing * 2), (T.petbuttonsize * 10) + (T.petbuttonspacing * 11), "RIGHT", TukuiBar3, "LEFT", -6, 0)
 end
@@ -135,6 +118,22 @@ if C["chat"].rightchatbackground == true then
 		end)
 
 	end
+end
+
+local TukuiBarLeft = CreateFrame("Frame", "TukuiBarLeft", UIParent, "SecureHandlerStateTemplate") -- Bar on top of Main bar (12)
+TukuiBarLeft:CreatePanel("Default", 1, 1, "BOTTOMLEFT", ChatBG1, "BOTTOMRIGHT", 6, 0)
+TukuiBarLeft:SetWidth(33)
+TukuiBarLeft:SetHeight(178)
+if C.general.colorscheme == true then
+	TukuiBarLeft:SetBackdropColor(unpack(C.general.color))
+end
+
+local TukuiBarRight = CreateFrame("Frame", "TukuiBarRight", UIParent, "SecureHandlerStateTemplate") -- Bar on top of Main bar (12)
+TukuiBarRight:CreatePanel("Default", 1, 1, "BOTTOMRIGHT", ChatBG2, "BOTTOMLEFT", -6, 0)
+TukuiBarRight:SetWidth(33)
+TukuiBarRight:SetHeight(178)
+if C.general.colorscheme == true then
+	TukuiBarRight:SetBackdropColor(unpack(C.general.color))
 end
 
 -- INFO LEFT (FOR STATS)
@@ -242,7 +241,8 @@ bnet:Hide()
 iright:CreateShadow("Default")
 ileft:CreateShadow("Default")
 TukuiBar1:CreateShadow("Default")
-TukuiBar2:CreateShadow("Default")
+TukuiBarLeft:CreateShadow("Default")
+TukuiBarRight:CreateShadow("Default")
 TukuiBar3:CreateShadow("Default")
 petbg:CreateShadow("Default")
 BNToastFrame:CreateShadow("Default")

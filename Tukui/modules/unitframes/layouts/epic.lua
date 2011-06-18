@@ -1779,7 +1779,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:Point("BOTTOM", UIParent, "BOTTOM", 330, 450)
+			arena[i]:Point("BOTTOM", UIParent, "BOTTOM", 369, 550)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 27)
 		end
@@ -1801,7 +1801,7 @@ if C["unitframes"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:Point("BOTTOM", UIParent, "BOTTOM", 330, 450)
+			boss[i]:Point("BOTTOM", UIParent, "BOTTOM", 369, 550)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 27)             
 		end
@@ -1855,19 +1855,19 @@ local function Update(self, elapsed)
 
 	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
  		if HasClassBar() == true then
-			CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -19)
+			CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -19)
 		else
-			CustomTukuiActionBar:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -9)
+			CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", -1, -9)
 		end
 		
 		if TukuiPet:IsShown() then
-			CustomTukuiActionBar:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
+			CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPet, "BOTTOMLEFT", 0, -6)
 		end
     TimeSinceLastUpdate = 0
 	end
 end
 
-CustomTukuiActionBar:SetScript("OnUpdate", Update)
+CustomTukuiActionBarAnchor:SetScript("OnUpdate", Update)
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 

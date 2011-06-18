@@ -5,11 +5,12 @@ if not C["actionbar"].enable == true then return end
 -- setup MultiBarLeft as bar #3 
 ---------------------------------------------------------------------------
 
-local bar = TukuiBar2
-if C.actionbar.swapbar1and3 then bar = TukuiBar1 end
-MultiBarBottomRight:SetParent(bar)
+local leftbar = TukuiBarLeft
+local rightbar = TukuiBarRight
 
-for i= 1, 12 do
+MultiBarBottomRight:SetParent(leftbar)
+
+for i= 1, 6 do
 	local b = _G["MultiBarBottomRightButton"..i]
 	local b2 = _G["MultiBarBottomRightButton"..i-1]
 	b:SetSize(T.buttonsize, T.buttonsize)
@@ -18,8 +19,23 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 	
 	if i == 1 then
-		b:SetPoint("BOTTOMLEFT", bar, T.buttonspacing, T.buttonspacing)
+		b:SetPoint("BOTTOMLEFT", leftbar, 3, 3)
 	else
-		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
+		b:SetPoint("BOTTOM", b2, "TOP", 0, 2)
+	end
+end
+
+for i= 7, 12 do
+	local b = _G["MultiBarBottomRightButton"..i]
+	local b2 = _G["MultiBarBottomRightButton"..i-1]
+	b:SetSize(T.buttonsize, T.buttonsize)
+	b:ClearAllPoints()
+	b:SetFrameStrata("MEDIUM")
+	b:SetFrameLevel(15)
+	
+	if i == 7 then
+		b:SetPoint("BOTTOMLEFT", rightbar, 3, 3)
+	else
+		b:SetPoint("BOTTOM", b2, "TOP", 0, 2)
 	end
 end

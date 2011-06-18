@@ -1,8 +1,11 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-
+--silly anchor trix are for kids
+local cbanchor = CreateFrame("Frame", "CustomTukuiActionBarAnchor", UIParent) 
+cbanchor:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
+cbanchor:SetAlpha(0)
 -- custom action bar (add spells in the profiles.lua)		
 local custombar = CreateFrame("Frame", "CustomTukuiActionBar", UIParent, "SecureHandlerStateTemplate")
-custombar:CreatePanel("Default", 1, 39, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, -6)
+custombar:CreatePanel("Default", 1, 39, "TOPLEFT", cbanchor, "BOTTOMLEFT", 0, 1)
 local totalprimary = table.getn(C.actionbar.custombar.primary)
 local totalsecondary = table.getn(C.actionbar.custombar.secondary)
 if (totalprimary ~= 0 or totalsecondary ~= 0)and C.actionbar.custombar.enable == true then
@@ -15,14 +18,37 @@ if (totalprimary ~= 0 or totalsecondary ~= 0)and C.actionbar.custombar.enable ==
 else
 	custombar:Hide()
 end
+local cbtoggle = CreateFrame("Frame", "CustomTukuiActionBarToggle", UIParent)
+cbtoggle:CreatePanel("Default", 1, 12, "TOPLEFT", custombar, "BOTTOMLEFT", 0, -3)
+cbtoggle.text = T.SetFontString(cbtoggle, C.media.uffont, 8)
+cbtoggle.text:SetPoint("CENTER")
+cbtoggle.text:SetText("Close")
+cbtoggle:SetAlpha(0)
+cbtoggle:SetScript("OnEnter", function() cbtoggle:SetAlpha(1) end)
+cbtoggle:SetScript("OnLeave", function() cbtoggle:SetAlpha(0) end)
+cbtoggle:SetScript("OnMouseDown", function()
+	if C.actionbar.custombar.enable ~= true then return end
+	if custombar:IsShown() then
+		custombar:Hide()
+		cbtoggle:SetPoint("TOPLEFT", cbanchor, "BOTTOMLEFT")
+		cbtoggle.text:SetText("Open")
+	else
+		custombar:Show()
+		cbtoggle:SetPoint("TOPLEFT", custombar, "BOTTOMLEFT", 0, -3)
+		cbtoggle.text:SetText("Close")
+	end
+end)
+
 
 local function MakePrimaryButtons()
 	local custombutton = {}
 	custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
 	if GetActiveTalentGroup() == 1 then
 		custombar:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
+		cbtoggle:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
 	else
 		custombar:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
+		cbtoggle:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
 	end
 	-- spell stuffz
 	for i, v in ipairs(C.actionbar.custombar.primary) do	
@@ -106,8 +132,10 @@ local function MakeSecondaryButtons()
 	custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
 	if GetActiveTalentGroup() == 1 then
 		custombar:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
+		cbtoggle:SetWidth((totalprimary)*35 + ((totalprimary)+1)*2)
 	else
 		custombar:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
+		cbtoggle:SetWidth((totalsecondary)*35 + ((totalsecondary)+1)*2)
 	end
 	-- spell stuffz
 	for i, v in ipairs(C.actionbar.custombar.secondary) do	

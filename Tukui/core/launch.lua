@@ -23,7 +23,7 @@ local function chatsetup()
 			local chatName = FCF_GetChatWindowInfo(chatFrameId)
 			
 			-- set the size of chat frames
-				frame:Size(366, 117)
+				frame:Size(366, 119)
 				SetChatWindowSavedDimensions(chatFrameId, 366, T.Scale(117))
 				-- move general bottom left or Loot (if found) on right
 				if C.panels.switchchats ~= true then
