@@ -1292,7 +1292,7 @@ local function Shared(self, unit)
 		end
 		
 		-- portraits
-		if (C["unitframes"].charportrait == true) then
+		if (C["unitframes"].charportrait == true) and lafo then
 			-- Portrait Border
 			pb = CreateFrame("Frame", "Focus_Portrait", self)
 			pb:CreatePanel("", 47, 1, "TOPRIGHT", health, "TOPLEFT", -6, 9)
@@ -1339,8 +1339,9 @@ local function Shared(self, unit)
 		health:SetPoint("TOPLEFT", 2, -2)
 		health:SetPoint("BOTTOMRIGHT", -2, 2)
 		health:SetStatusBarTexture(normTex)
-		health:SetOrientation('VERTICAL')
-
+		if lafo then
+			health:SetOrientation('VERTICAL')
+		end
 		health.frequentUpdates = true
 		health.colorDisconnected = true
 		if C["unitframes"].showsmooth == true then
@@ -1768,9 +1769,9 @@ if lafo then
 	focustarget:Size(playerwidth-194, 40)
 	focustarget:Point("BOTTOMLEFT", TukuiFocus, "BOTTOMRIGHT", 3, 0)
 else
-	focus:Size(playerwidth/2 -18, 18)
-	focus:Point("TOPRIGHT", TukuiPlayer_Portrait, "TOPLEFT", -5, 2)
-	focustarget:Size(playerwidth/2 -18, 18)
+	focus:Size(playerwidth/2 -18, 22)
+	focus:Point("TOPRIGHT", TukuiPlayer_Portrait, "TOPLEFT", -5, 0)
+	focustarget:Size(playerwidth/2 -18, 22)
 	focustarget:Point("TOPRIGHT", TukuiFocus, "BOTTOMRIGHT", 0, -3)
 end
 
