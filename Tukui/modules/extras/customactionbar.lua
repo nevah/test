@@ -39,7 +39,6 @@ cbtoggle:SetScript("OnMouseDown", function()
 	end
 end)
 
-
 local function MakePrimaryButtons()
 	local custombutton = {}
 	custombutton = CreateFrame("Button", "CustomButton", custombar, "SecureActionButtonTemplate")
@@ -76,7 +75,9 @@ local function MakePrimaryButtons()
 		-- hoverover stuffz
 		custombutton[i]:StyleButton()
 		-- cooldown stuffz
-		local function Update(self, t)
+		local function OnUpdate(self, elapsed)
+		TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
+		if(TimeSinceLastUpdate > .5) then
 		local name = GetItemInfo(v)
 			if IsEquippedItem(name) == 1 then
 				custombutton[i].value:Hide()
@@ -86,6 +87,7 @@ local function MakePrimaryButtons()
 				if trinket1id == v then var = 13 elseif trinket2id == v then var = 14 end
 				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
 				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "item");
 				custombutton[i]:SetAttribute("item", var)
 				if enabled ~= 0 then
@@ -98,6 +100,7 @@ local function MakePrimaryButtons()
 				custombutton[i].value:Hide()
 				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
 				local start, duration, enabled = GetSpellCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "spell");
 				custombutton[i]:SetAttribute("spell", v)
 				if enabled ~= 0 then
@@ -110,6 +113,7 @@ local function MakePrimaryButtons()
 			if type(v) == "number" then
 				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
 				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "item");
 				custombutton[i]:SetAttribute("item", GetItemInfo(v))
 				if enabled ~= 0 then
@@ -122,8 +126,16 @@ local function MakePrimaryButtons()
 			else
 				custombutton[i].value:Show()
 			end
+		
+			if custombutton[i].startval == 0 then
+				custombutton[i].cooldown:SetAlpha(0)
+			else
+				custombutton[i].cooldown:SetAlpha(1)
+			end
+			TimeSinceLastUpdate = 0
+			end
 		end
-		custombutton[i]:SetScript("OnUpdate", Update)
+		custombutton[i]:SetScript("OnUpdate", OnUpdate)
 	end
 end
 
@@ -152,7 +164,7 @@ local function MakeSecondaryButtons()
 		custombutton[i].texture:Point("BOTTOMRIGHT", custombutton[i] ,"BOTTOMRIGHT", -2, 2)
 		-- cooldown overlay
 		custombutton[i].cooldown = CreateFrame("Cooldown", "$parentCD", custombutton[i], "CooldownFrameTemplate")
-		custombutton[i].cooldown:SetAllPoints(custombutton[i].texture)				
+		custombutton[i].cooldown:SetAllPoints(custombutton[i].texture)	
 		-- text settup
 		custombutton[i].value = custombutton[i]:CreateFontString(nil, "ARTWORK")
 		custombutton[i].value:SetFont(C["media"].font, 12, "OUTLINE")
@@ -163,7 +175,9 @@ local function MakeSecondaryButtons()
 		-- hoverover stuffz
 		custombutton[i]:StyleButton()
 		-- cooldown stuffz
-		local function Update(self, t)
+		local function OnUpdate(self, elapsed)
+		TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
+		if(TimeSinceLastUpdate > .5) then
 		local name = GetItemInfo(v)
 			if IsEquippedItem(name) == 1 then
 				custombutton[i].value:Hide()
@@ -173,6 +187,7 @@ local function MakeSecondaryButtons()
 				if trinket1id == v then var = 13 elseif trinket2id == v then var = 14 end
 				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
 				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "item");
 				custombutton[i]:SetAttribute("item", var)
 				if enabled ~= 0 then
@@ -185,6 +200,7 @@ local function MakeSecondaryButtons()
 				custombutton[i].value:Hide()
 				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
 				local start, duration, enabled = GetSpellCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "spell");
 				custombutton[i]:SetAttribute("spell", v)
 				if enabled ~= 0 then
@@ -197,6 +213,7 @@ local function MakeSecondaryButtons()
 			if type(v) == "number" then
 				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
 				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "item");
 				custombutton[i]:SetAttribute("item", GetItemInfo(v))
 				if enabled ~= 0 then
@@ -209,8 +226,16 @@ local function MakeSecondaryButtons()
 			else
 				custombutton[i].value:Show()
 			end
+		
+			if custombutton[i].startval == 0 then
+				custombutton[i].cooldown:SetAlpha(0)
+			else
+				custombutton[i].cooldown:SetAlpha(1)
+			end
+			TimeSinceLastUpdate = 0
+			end
 		end
-		custombutton[i]:SetScript("OnUpdate", Update)
+		custombutton[i]:SetScript("OnUpdate", OnUpdate)
 	end
 end
 

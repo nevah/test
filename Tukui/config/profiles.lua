@@ -38,6 +38,10 @@ if T.myname == "Epicpower" then
 	C.actionbar.custombar.secondary = {"Mirror Image", "Presence of Mind", "Arcane Power", "Evocation", 36799}
 end
 
+if T.myname == "Epixgrim" then
+	C.actionbar.custombar.primary = {}
+	C.actionbar.custombar.secondary = {"Throwdown", "Intimidating Shout", "Enraged Regeneration", "Bladestorm", "Deadly Calm" }
+end
 
 if T.myname == "Epicgoose" then
 	C.swingtimer.enable = true

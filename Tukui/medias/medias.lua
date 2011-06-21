@@ -24,6 +24,7 @@ C["media"] = {
 	["bordercolor"] = C.general.bordercolor or { .15, .15, .15 }, -- border color of tukui panels
 	["backdropcolor"] = C.general.backdropcolor or { .05,.05,.05 }, -- background color of tukui panels
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
+	["patterned"] = [[Interface\AddOns\Tukui\medias\textures\patterned]],
 	
 	-- sound
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],

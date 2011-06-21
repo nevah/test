@@ -607,6 +607,23 @@ local function Shared(self, unit)
 					self.TotemBar = TotemBar
 			
 			-- ShammyShield
+				local TimeSinceLastUpdate = 0
+				local function OnUpdate(self, elapsed, name)
+					TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
+					if(TimeSinceLastUpdate > .5) then
+						local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(self.name))
+						local time = GetTime()
+						local remaining = expirationTime - time
+							if (time > expirationTime) then
+								self:SetValue(0)
+							else
+								self:SetValue(remaining/duration)
+							end
+
+						TimeSinceLastUpdate = 0
+					end
+				end
+				
 				local ss = CreateFrame("StatusBar", "Shammy Shield", self)
 				ss:Point("TOPLEFT", TukuiPlayer_Portrait, "BOTTOMLEFT", 2, -3)
 				ss:Size(43, 5)
@@ -634,44 +651,20 @@ local function Shared(self, unit)
 							ss:SetValue(1)
 							ss.bg:SetTexture(.02,.02,.02)
 							ss:SetStatusBarColor(.19,.48,.60)
-							ss:SetScript("OnUpdate", function()
-								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
-								local time = GetTime()
-								local remaining = expirationTime - time
-									if (time > expirationTime) then
-										ss:SetValue(0)
-									else
-										ss:SetValue(remaining/duration)
-									end
-							end)
+							ss.name = name
+							ss:SetScript("OnUpdate", OnUpdate)
 						elseif name == "Lightning Shield" then
 							ss:SetValue(1)
 							ss.bg:SetTexture(.02,.02,.02)
 							ss:SetStatusBarColor(.42,.18,.74)
-							ss:SetScript("OnUpdate", function()
-								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
-								local time = GetTime()
-								local remaining = expirationTime - time
-									if (time > expirationTime) then
-										ss:SetValue(0)
-									else
-										ss:SetValue(remaining/duration)
-									end
-							end)
+							ss.name = name
+							ss:SetScript("OnUpdate", OnUpdate)
 						elseif name == "Earth Shield" then
 							ss:SetValue(1)
 							ss.bg:SetTexture(.02,.02,.02)
 							ss:SetStatusBarColor((184/255),(134/255),(11/255))
-							ss:SetScript("OnUpdate", function()
-								local _,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", tostring(name))
-								local time = GetTime()
-								local remaining = expirationTime - time
-									if (time > expirationTime) then
-										ss:SetValue(0)
-									else
-										ss:SetValue(remaining/duration)
-									end
-							end)							
+							ss.name = name
+							ss:SetScript("OnUpdate", OnUpdate)							
 						end	
 					end
 				else
