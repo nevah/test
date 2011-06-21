@@ -648,19 +648,16 @@ local function Shared(self, unit)
 					for index = 1, 40 do
 						local name,_,_,_,_, duration, expirationTime,_,_,_,_ = UnitAura("player", index)
 						if name == "Water Shield" then
-							ss:SetValue(1)
 							ss.bg:SetTexture(.02,.02,.02)
 							ss:SetStatusBarColor(.19,.48,.60)
 							ss.name = name
 							ss:SetScript("OnUpdate", OnUpdate)
 						elseif name == "Lightning Shield" then
-							ss:SetValue(1)
 							ss.bg:SetTexture(.02,.02,.02)
 							ss:SetStatusBarColor(.42,.18,.74)
 							ss.name = name
 							ss:SetScript("OnUpdate", OnUpdate)
 						elseif name == "Earth Shield" then
-							ss:SetValue(1)
 							ss.bg:SetTexture(.02,.02,.02)
 							ss:SetStatusBarColor((184/255),(134/255),(11/255))
 							ss.name = name
