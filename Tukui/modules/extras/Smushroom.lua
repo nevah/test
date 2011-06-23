@@ -6,7 +6,7 @@ if T.myclass ~= "DRUID" then return end
 
 local tMushroom = {}
 local options = {
-	anchor = {"CENTER", UIParent, "CENTER", -48, 25},
+	anchor = {"CENTER", UIParent, "CENTER", -48, 40},
 	color = {.3, .3, .3},
 	readycolor = {.2, .9, .1},
 }

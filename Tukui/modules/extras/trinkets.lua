@@ -29,32 +29,45 @@ for i = 1, 2 do
 	-- hoverover stuffz
 	trinketbutton[i]:StyleButton()
 	-- cooldown stuffz
-	trinketbutton[i]:SetScript("OnUpdate", function()
-	local var = i + 12
-	local trinket1id = GetInventoryItemID("player", 13)
-	local trinket2id = GetInventoryItemID("player", 14)
-	if i == 1 then
-		trinketbutton[i].texture:SetTexture(select(10, GetItemInfo(trinket1id)))
-		local start, duration, enabled = GetItemCooldown(trinket1id)
-		if enabled ~= 0 then
-		trinketbutton[i].texture:SetVertexColor(1,1,1)
-		trinketbutton[i].cooldown:SetCooldown(start, duration)
+	local function OnUpdate(self, elapsed)
+	TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
+	if(TimeSinceLastUpdate > .5) then
+		local var = i + 12
+		local trinket1id = GetInventoryItemID("player", 13)
+		local trinket2id = GetInventoryItemID("player", 14)
+		if i == 1 then
+			trinketbutton[i].texture:SetTexture(select(10, GetItemInfo(trinket1id)))
+			local start, duration, enabled = GetItemCooldown(trinket1id)
+			trinketbutton[i].startval = start
+			if enabled ~= 0 then
+			trinketbutton[i].texture:SetVertexColor(1,1,1)
+			trinketbutton[i].cooldown:SetCooldown(start, duration)
+			else
+			trinketbutton[i].texture:SetVertexColor(.35, .35, .35)
+			end	
 		else
-		trinketbutton[i].texture:SetVertexColor(.35, .35, .35)
-		end	
-	else
-		trinketbutton[i].texture:SetTexture(select(10, GetItemInfo(trinket2id)))
-		local start, duration, enabled = GetItemCooldown(trinket2id)
-		if enabled ~= 0 then
-		trinketbutton[i].texture:SetVertexColor(1,1,1)
-		trinketbutton[i].cooldown:SetCooldown(start, duration)
+			trinketbutton[i].texture:SetTexture(select(10, GetItemInfo(trinket2id)))
+			local start, duration, enabled = GetItemCooldown(trinket2id)
+			trinketbutton[i].startval = start
+			if enabled ~= 0 then
+			trinketbutton[i].texture:SetVertexColor(1,1,1)
+			trinketbutton[i].cooldown:SetCooldown(start, duration)
+			else
+			trinketbutton[i].texture:SetVertexColor(.35, .35, .35)
+			end	
+		end
+		trinketbutton[i]:SetAttribute("type", "item");
+		trinketbutton[i]:SetAttribute("item", var)
+		
+		if trinketbutton[i].startval == 0 then
+			trinketbutton[i].cooldown:SetAlpha(0)
 		else
-		trinketbutton[i].texture:SetVertexColor(.35, .35, .35)
-		end	
+			trinketbutton[i].cooldown:SetAlpha(1)
+		end
+		TimeSinceLastUpdate = 0
 	end
-	trinketbutton[i]:SetAttribute("type", "item");
-	trinketbutton[i]:SetAttribute("item", var)
-	end)
+	end
+	trinketbutton[i]:SetScript("OnUpdate", OnUpdate)
 end
 trinketbar:Hide()
 

@@ -241,7 +241,7 @@ C["databars"] = {
 	["bags"] = 2,
 	["exp_rep"] = 1,
 	["durability"] = 6,
-	["currency"] = 7,
+	["currency"] = 0,
 	["talents"] = 0,
 }
 

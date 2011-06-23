@@ -307,7 +307,7 @@ local bsize = (((TukuiMinimap:GetWidth()) - (TukuiDB.Scale(4) * 7)) / 6)
 
 --Create the Main bar
 local raidbuff_reminder = CreateFrame("Frame", "RaidBuffReminder", TukuiMinimap)
-raidbuff_reminder:CreatePanel(raidbuff_reminder, TukuiMinimap:GetWidth(), bsize + TukuiDB.Scale(8), "TOPLEFT", TukuiMinimapStatsLeft, "BOTTOMLEFT", 0, TukuiDB.Scale(-3))
+raidbuff_reminder:CreatePanel(raidbuff_reminder, TukuiMinimap:GetWidth(), bsize + TukuiDB.Scale(8), "TOPLEFT", TukuiMinimap, "BOTTOMLEFT", 0, TukuiDB.Scale(-3))
 	if C.general.ali == true then
 	raidbuff_reminder:SetBackdropColor(unpack(C.general.color))
 	end

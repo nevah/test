@@ -19,7 +19,7 @@ if T.myname == "Epicgrim" then
 	C.actionbar.hideshapeshift = true
 	C.unitframes.classbar = false
 	C.actionbar.custombar.primary = {"Rebirth", "Innervate", "Tranquility", 58091, 5512}
-	C.actionbar.custombar.secondary = {"Rebirth", "Innervate", "Tranquility", 58184}
+	C.actionbar.custombar.secondary = {"Rebirth", "Barkskin", "Frenzied Regeneration", "Survival Instincts"}
 end
 
 if T.myname == "Epicelement" then
@@ -39,7 +39,7 @@ if T.myname == "Epicpower" then
 end
 
 if T.myname == "Epixgrim" then
-	C.actionbar.custombar.primary = {}
+	C.actionbar.custombar.primary = {"Shield Wall", "Last Stand", "Enraged Regeneration", "Shield Block"}
 	C.actionbar.custombar.secondary = {"Throwdown", "Intimidating Shout", "Enraged Regeneration", "Bladestorm", "Deadly Calm" }
 end
 

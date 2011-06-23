@@ -190,30 +190,23 @@ if C.general.colorscheme == true then
 	iright:SetBackdropColor(unpack(C.general.color))
 end
 
-if TukuiMinimap then
-	local minimapstatsleft = CreateFrame("Frame", "TukuiMinimapStatsLeft", TukuiMinimap)
-	local minimapstatsright = CreateFrame("Frame", "TukuiMinimapStatsRight", TukuiMinimap)
-	minimapstatsleft:SetFrameLevel(4)
-	minimapstatsright:SetFrameLevel(4)
-	
+-- Info at top
+local itopl = CreateFrame("Frame", "TukuiTopStatsLeft", UIParent)
+local itopr = CreateFrame("Frame", "TukuiTopStatsRight", UIParent)
+itopl:CreatePanel("Default", 75, 20, "RIGHT", Spec, "LEFT", -3, 0)
+itopr:CreatePanel("Default", 75, 20, "LEFT", Spec, "RIGHT", 3, 0)
+
+if C.general.colorscheme == true then
+	itopl:SetBackdropColor(unpack(C.general.color))
+	itopr:SetBackdropColor(unpack(C.general.color))	
+end
+
+if TukuiMinimap then	
 	if C["datatext"].zonepanel == true then
 		local zonepanel = CreateFrame("Frame", "TukuiZonePanel", TukuiMinimap)
 		zonepanel:CreatePanel("Default", TukuiMinimap:GetWidth(), 19, "TOP", TukuiMinimap, "BOTTOM", 0, -2)
 		zonepanel:CreateShadow("Default")
-		
-		minimapstatsleft:CreatePanel("Default", (TukuiMinimap:GetWidth()/ 2) + 2, 19, "TOPLEFT", TukuiZonePanel, "BOTTOMLEFT", 0, -T.mult)
-		minimapstatsright:CreatePanel("Default", (TukuiMinimap:GetWidth()/ 2) + 1, 19, "TOPRIGHT", TukuiZonePanel, "BOTTOMRIGHT", 0, -T.mult)
-	else
-		minimapstatsleft:CreatePanel("Default", (TukuiMinimap:GetWidth()/ 2) + 2, 19, "TOPLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -T.mult)
-		minimapstatsright:CreatePanel("Default", (TukuiMinimap:GetWidth()/ 2) + 1, 19, "TOPRIGHT", TukuiMinimap, "BOTTOMRIGHT", 0, -T.mult)
 	end
-	if C.general.colorscheme == true then
-		minimapstatsleft:SetBackdropColor(unpack(C.general.color))
-		minimapstatsright:SetBackdropColor(unpack(C.general.color))
-		minimapstatsleft:SetPoint("TOPLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -3)
-		minimapstatsright:SetPoint("TOPRIGHT", TukuiMinimap, "BOTTOMRIGHT", 0, -3)	
-	end
-	
 end
 
 --BATTLEGROUND STATS FRAME

@@ -24,8 +24,8 @@ end
 T.PP = function(p, obj)
 	local left = TukuiInfoLeft
 	local right = TukuiInfoRight
-	local mapleft = TukuiMinimapStatsLeft
-	local mapright = TukuiMinimapStatsRight
+	local topleft = TukuiTopStatsLeft
+	local topright = TukuiTopStatsRight
 	
 	if p == 1 then
 		obj:SetParent(left)
@@ -61,20 +61,16 @@ T.PP = function(p, obj)
 		obj:SetPoint("RIGHT", right, -20, 0)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
-	end
-	
-	if TukuiMinimap then
-		if p == 7 then
-			obj:SetParent(mapleft)
-			obj:SetHeight(mapleft:GetHeight())
-			obj:SetPoint('TOP', mapleft)
-			obj:SetPoint('BOTTOM', mapleft)
-		elseif p == 8 then
-			obj:SetParent(mapright)
-			obj:SetHeight(mapright:GetHeight())
-			obj:SetPoint('TOP', mapright)
-			obj:SetPoint('BOTTOM', mapright)
-		end
+	elseif p == 7 then
+		obj:SetParent(topleft)
+		obj:SetHeight(topleft:GetHeight())
+		obj:SetPoint('TOP', topleft)
+		obj:SetPoint('BOTTOM', topleft)
+	elseif p == 8 then
+		obj:SetParent(topright)
+		obj:SetHeight(topright:GetHeight())
+		obj:SetPoint('TOP', topright)
+		obj:SetPoint('BOTTOM', topright)
 	end
 end
 

@@ -1,7 +1,4 @@
------------------------------------------------
--- Spec Helper, by EPIC
------------------------------------------------
-local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 -- colors
 local hoverovercolor = {.4, .4, .4}
@@ -54,77 +51,64 @@ end
 -- Spec
 -----------
 local spec = CreateFrame("Button", "Spec", UIParent)
-spec:CreatePanel("Default", 1, 20, "TOPRIGHT", UIParent, "TOPRIGHT", -32, -212)
+spec:CreatePanel("Default", 150, 20, "TOP", UIParent, "TOP", 0, -3)
 
-	-- Positioning
-	if TukuiMinimap then
-		spec:SetPoint("TOPLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -3)
-		spec:SetPoint("TOPRIGHT", TukuiMinimap, "BOTTOMRIGHT", -23, -3)
-	end
-	if TukuiMinimapStatsLeft and TukuiMinimapStatsRight then
-		spec:SetPoint("TOPLEFT", TukuiMinimapStatsLeft, "BOTTOMLEFT", 0, -3)
-		spec:SetPoint("TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", -23, -3)
-	end
-	if RaidBuffReminder then
-		spec:SetPoint("TOPLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, -3)
-		spec:SetPoint("TOPRIGHT", RaidBuffReminder, "BOTTOMRIGHT", -23, -3)
-	end	
-	-- Text
-	spec.t = spec:CreateFontString(spec, "OVERLAY")
-	spec.t:SetPoint("CENTER")
-	spec.t:SetFont(C["media"].uffont, C.datatext.fontsize)
+-- Text
+spec.t = spec:CreateFontString(spec, "OVERLAY")
+spec.t:SetPoint("CENTER")
+spec.t:SetFont(C["media"].uffont, C.datatext.fontsize)
 
-	local int = 1
-	local function Update(self, t)
-	int = int - t
-	if int > 0 then return end
-		if not GetPrimaryTalentTree() then spec.t:SetText("No talents") return end
-		local tree1, tree2, tree3, Tree = ActiveTalents()
-		local name = select(2, GetTalentTabInfo(Tree))
-		spec.t:SetText(name.." "..panelcolor..tree1.."/"..tree2.."/"..tree3)
-		if HasDualSpec() then
-			local sTree1, sTree2, sTree3, sTree = UnactiveTalents()
-			sName = select(2, GetTalentTabInfo(sTree))
-			spec:SetScript("OnEnter", function() spec.t:SetText(cm..sName.." "..panelcolor..sTree1.."/"..sTree2.."/"..sTree3) end)
-			spec:SetScript("OnLeave", function() spec.t:SetText(name.." "..panelcolor..tree1.."/"..tree2.."/"..tree3) end)
-		end
-		int = 1
-		self:SetScript("OnUpdate", nil)
+local int = 1
+local function Update(self, t)
+int = int - t
+if int > 0 then return end
+	if not GetPrimaryTalentTree() then spec.t:SetText("No talents") return end
+	local tree1, tree2, tree3, Tree = ActiveTalents()
+	local name = select(2, GetTalentTabInfo(Tree))
+	spec.t:SetText(name.." "..panelcolor..tree1.."/"..tree2.."/"..tree3)
+	if HasDualSpec() then
+		local sTree1, sTree2, sTree3, sTree = UnactiveTalents()
+		sName = select(2, GetTalentTabInfo(sTree))
+		spec:SetScript("OnEnter", function() spec.t:SetText(cm..sName.." "..panelcolor..sTree1.."/"..sTree2.."/"..sTree3) end)
+		spec:SetScript("OnLeave", function() spec.t:SetText(name.." "..panelcolor..tree1.."/"..tree2.."/"..tree3) end)
 	end
-	
-	local function OnEvent(self, event)
-		if event == "PLAYER_ENTERING_WORLD" then
-			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-		else
-			self:SetScript("OnUpdate", Update)
-		end
-	end
-	
-	spec:RegisterEvent("PLAYER_TALENT_UPDATE")
-	spec:RegisterEvent("PLAYER_ENTERING_WORLD")
-	spec:RegisterEvent("CHARACTER_POINTS_CHANGED")
-	spec:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-	spec:SetScript("OnEvent", OnEvent) 
+	int = 1
+	self:SetScript("OnUpdate", nil)
+end
 
-	spec:SetScript("OnClick", function(self) 
-	local i = GetActiveTalentGroup()
-	if IsModifierKeyDown() then
-		ToggleTalentFrame()
+local function OnEvent(self, event)
+	if event == "PLAYER_ENTERING_WORLD" then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	else
-		if i == 1 then SetActiveTalentGroup(2) end
-		if i == 2 then SetActiveTalentGroup(1) end
+		self:SetScript("OnUpdate", Update)
 	end
-	end)
-	
-	if C.general.colorscheme == true then
-		spec:SetBackdropColor(unpack(C.general.color))
-	end
+end
+
+spec:RegisterEvent("PLAYER_TALENT_UPDATE")
+spec:RegisterEvent("PLAYER_ENTERING_WORLD")
+spec:RegisterEvent("CHARACTER_POINTS_CHANGED")
+spec:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+spec:SetScript("OnEvent", OnEvent) 
+
+spec:SetScript("OnClick", function(self) 
+local i = GetActiveTalentGroup()
+if IsModifierKeyDown() then
+	ToggleTalentFrame()
+else
+	if i == 1 then SetActiveTalentGroup(2) end
+	if i == 2 then SetActiveTalentGroup(1) end
+end
+end)
+
+if C.general.colorscheme == true then
+	spec:SetBackdropColor(unpack(C.general.color))
+end
 
 ----------------
 --Toggle Button
 ----------------
 local toggle = CreateFrame("Button", "Toggle", Spec)
-toggle:CreatePanel("Default", 20, 20, "TOPLEFT", Spec, "TOPRIGHT", 3, 0)
+toggle:CreatePanel("Default", 20, 20, "TOPLEFT", Spec, "TOPRIGHT", 81, 0)
 
 	if C.general.ali == true then
 	toggle:SetBackdropColor(unpack(C.general.color))
@@ -154,8 +138,8 @@ toggle:CreatePanel("Default", 20, 20, "TOPLEFT", Spec, "TOPRIGHT", 3, 0)
 --------------
 -- DPS layout
 --------------
-local dps = CreateFrame("Button", "DPS", Toggle, "SecureActionButtonTemplate")
-dps:CreatePanel("Default", 28, 19, "TOPRIGHT", Toggle, "BOTTOMRIGHT", 0, -3)
+local dps = CreateFrame("Button", "DPS", Spec, "SecureActionButtonTemplate")
+dps:CreatePanel("Default", 28, 19, "TOPRIGHT", Spec, "BOTTOMRIGHT", 0, -3)
 dps:Hide()		
 dps.t = dps:CreateFontString(nil, "OVERLAY")
 dps.t:SetPoint("CENTER")
